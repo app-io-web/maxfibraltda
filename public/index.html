@@ -6,6 +6,9 @@
     <meta name="theme-color" content="#00d400" />
 
     <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://maxfibraltda.com.br" />
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
 
     <!-- 🔹 Meta Tags para SEO -->
@@ -32,6 +35,13 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+
     <!-- 🔹 Título do Site -->
     <title>MaxFibra - Internet de Alta Velocidade</title>
   </head>
@@ -46,5 +56,27 @@
       navigator.serviceWorker.register("/sw.js");
     }
   </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MaxFibra",
+      "url": "https://maxfibraltda.com.br",
+      "logo": "https://maxfibraltda.com.br/logo512.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-11-99999-9999",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.facebook.com/maxfibra",
+        "https://www.instagram.com/maxfibra",
+        "https://twitter.com/maxfibra"
+      ]
+    }
+    </script>
   
 </html>
