@@ -6,18 +6,24 @@ import '../../Styles/PlanosAnimations.css'; // Importando o CSS de animação
 
 function Gold() {
   const [servicos, setServicos] = useState([]);
+  const [maisVendido, setMaisVendido] = useState(false);
 
   useEffect(() => {
     const fetchServicos = async () => {
       const data = await getServicosAdicionais();
-      setServicos(data.gold);
+      setServicos(data.gold.servicos || []); // Pegando apenas os serviços do plano Gold
+      setMaisVendido(data.gold.maisVendido); // Verifica se o plano Gold é o mais vendido
     };
-
+  
     fetchServicos();
   }, []);
+  
 
   return (
     <div className="plano-card gold-animation">
+      {/* Se o plano for mais vendido, exibe a tag */}
+      {maisVendido && <div className="mais-vendido-tag">Mais Vendido</div>}
+
       <h3>Gold</h3>
       <p className="preco">R$ 129,90 / mês</p>
 

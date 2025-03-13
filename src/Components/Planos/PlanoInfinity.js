@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import getServicosAdicionais from '../../Services/planosService';
+import getServicosAdicionais from '../../Services/planosService'; // Caminho corrigido
 import { FaWifi, FaTachometerAlt, FaHeadset, FaCheckCircle } from 'react-icons/fa';
 import '../../Styles/Planos.css';
 import '../../Styles/PlanosAnimations.css'; // Importando o CSS de animação
-function Infinity() {
+
+function PlanoInfinity() { // Nome corrigido para evitar conflito com "Infinity" global
   const [servicos, setServicos] = useState([]);
+  const [maisVendido, setMaisVendido] = useState(false);
 
   useEffect(() => {
     const fetchServicos = async () => {
       const data = await getServicosAdicionais();
-      setServicos(data.infinity);
+      setServicos(data.infinity.servicos || []); // Pegando apenas os serviços do plano Infinity
+      setMaisVendido(data.infinity.maisVendido); // Verifica se o plano Infinity é o mais vendido
     };
-
+  
     fetchServicos();
   }, []);
+  
 
   return (
     <div className="plano-card infinity-animation">
+      {/* Se for mais vendido, exibe a tag */}
+      {maisVendido && <div className="mais-vendido-tag">Mais Vendido</div>}
+
       <h3>Infinity</h3>
       <p className="preco">R$ 169,90 / mês</p>
 
@@ -45,4 +52,4 @@ function Infinity() {
   );
 }
 
-export default Infinity;
+export default PlanoInfinity;

@@ -11,7 +11,7 @@ const getServicosAdicionais = async () => {
         'Content-Type': 'application/json',
       },
       params: {
-        fields: 'Plano - Turbo - Serviço Adicional,Plano - Gold - Serviço Adicional,Plano - Infinity - Serviço Adicional',
+        fields: 'Plano - Turbo - Serviço Adicional,Plano - Gold - Serviço Adicional,Plano - Infinity - Serviço Adicional,Tag-MaisVendido',
         limit: 1,
       },
     });
@@ -19,13 +19,22 @@ const getServicosAdicionais = async () => {
     const data = response.data.list[0];
 
     return {
-      turbo: data["Plano - Turbo - Serviço Adicional"]?.[0]?.Serviços || [],
-      gold: data["Plano - Gold - Serviço Adicional"]?.[0]?.Serviços || [],
-      infinity: data["Plano - Infinity - Serviço Adicional"]?.[0]?.Serviços || [],
+      turbo: {
+        servicos: data["Plano - Turbo - Serviço Adicional"]?.[0]?.Serviços || [],
+        maisVendido: data["Tag-MaisVendido"] === "Turbo",
+      },
+      gold: {
+        servicos: data["Plano - Gold - Serviço Adicional"]?.[0]?.Serviços || [],
+        maisVendido: data["Tag-MaisVendido"] === "Gold",
+      },
+      infinity: {
+        servicos: data["Plano - Infinity - Serviço Adicional"]?.[0]?.Serviços || [],
+        maisVendido: data["Tag-MaisVendido"] === "Infinity",
+      }
     };
   } catch (error) {
     console.error('Erro ao buscar os serviços adicionais:', error);
-    return { turbo: [], gold: [], infinity: [] };
+    return { turbo: { servicos: [], maisVendido: false }, gold: { servicos: [], maisVendido: false }, infinity: { servicos: [], maisVendido: false } };
   }
 };
 

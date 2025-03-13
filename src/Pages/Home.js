@@ -4,6 +4,7 @@ import MobileHeader from '../Components/Mobile/MobileHeader';
 import BannerSlider from '../Components/BannerSlider';
 import DynamicPhrase from '../Components/DynamicPhrase';
 import Planos from '../Components/Planos/Planos';
+import Beneficios from '../Components/Beneficios/Beneficios';
 import '../Styles/Home.css';
 
 function Home() {
@@ -25,6 +26,7 @@ function Home() {
       {isMobile ? <MobileHeader /> : <Header />}
       <main className="content">
       <BannerSlider />
+      <Beneficios />
       <DynamicPhrase />
       <Planos />
       </main>

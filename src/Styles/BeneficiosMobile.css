@@ -1,0 +1,24 @@
+@media screen and (max-width: 768px) {
+    .cards-beneficios {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 10px;
+      padding: 20px;
+      justify-content: flex-start;
+    }
+  
+    .beneficio-card {
+      width: 85%; /* Ajuste para melhor responsividade */
+      max-width: 280px;
+      min-width: 220px;
+      scroll-snap-align: center;
+      flex: 0 0 auto;
+      text-align: center;
+    }
+  
+    .beneficios-texto {
+      display: none; /* Esconde o texto lateral no mobile */
+    }
+  }
+  

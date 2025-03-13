@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'; // Importa Autoplay
 import Turbo from './Turbo';
 import Gold from './Gold';
-import Infinity from './Infinity';
+import Infinity from './PlanoInfinity';
 import '../../Styles/Planos.css';
 
 function PlanosSlider() {
@@ -37,13 +37,13 @@ function PlanosSlider() {
         loop={true} // Permite que o Swiper volte para o primeiro slide após o último
       >
         <SwiperSlide>
-          <Turbo />
+        <Turbo />
         </SwiperSlide>
         <SwiperSlide>
-          <Gold />
+        <Infinity />
         </SwiperSlide>
         <SwiperSlide>
-          <Infinity />
+        <Gold />
         </SwiperSlide>
       </Swiper>
     </div>

@@ -1,3 +1,9 @@
+
+@import './PlanosResponsive.css';
+
+
+
+
 .planos-container {
   display: flex;
   justify-content: center;
@@ -5,6 +11,23 @@
   margin-top: 20px;
   flex-wrap: wrap; /* Responsivo */
 }
+
+
+.mais-vendido-tag {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #069b06;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+}
+
 
 .plano-card {
   background: white;
