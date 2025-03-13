@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#00d400" />
 
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable">
+
+
     <!-- 🔹 Meta Tags para SEO -->
     <meta name="description" content="MaxFibra - Internet de Alta Velocidade. Conheça os melhores planos de fibra óptica para sua casa ou empresa." />
     <meta name="keywords" content="internet fibra, planos de internet, MaxFibra, Wi-Fi, internet rápida, conexão estável, banda larga" />
@@ -37,4 +40,11 @@
     <noscript>⚠️ Você precisa habilitar o JavaScript para rodar este site corretamente.</noscript>
     <div id="root"></div>
   </body>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js");
+    }
+  </script>
+  
 </html>
