@@ -1,0 +1,200 @@
+.planos-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Responsivo */
+}
+
+.plano-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  width: 90%; /* Ajuste para centralizar */
+  max-width: 380px;
+  min-height: 650px; /* Define um tamanho mínimo para todos */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribui espaço */
+}
+
+.plano-card {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto; /* Isso centraliza o card dentro do slide */
+}
+
+
+
+
+.plano-card:hover {
+  transform: translateY(-5px);
+}
+
+.plano-card h3 {
+  background: #00d400;
+  color: white;
+  padding: 12px 0; /* Removendo padding lateral */
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 8px 8px 0 0;
+  margin: -25px -25px 10px -25px; /* Expandindo para cobrir toda a largura */
+  text-align: center;
+  width: calc(100% + 50px); /* Ajustando para cobrir o espaço extra */
+}
+
+
+.preco {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.plano-beneficios {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.plano-beneficios li {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  padding: 5px 0;
+}
+
+.plano-beneficios li svg {
+  color: #00d400;
+  font-size: 18px;
+}
+
+.servicos-list {
+  margin-top: 20px;
+}
+
+.servicos-list h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.servicos-grid {
+    display: flex;
+    gap: 1px;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.servico-item {
+  width: 70px;
+  text-align: center;
+}
+
+.servico-item img {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid #eee;
+  transition: transform 0.3s ease-in-out;
+}
+
+.servico-item img:hover {
+  transform: scale(1.1);
+}
+
+.assinar-btn {
+  background: #00d400;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.3s ease-in-out;
+}
+
+.assinar-btn:hover {
+  background: #009900;
+}
+
+.obs{
+  font-size: 12px;
+}
+
+.planos-slider {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto; /* Isso centraliza o Swiper */
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center; /* Garante alinhamento correto */
+  align-items: center;
+  padding: 10px;
+}
+
+/* Altera a cor das bolinhas da paginação */
+.swiper-pagination-bullet {
+  background-color: #ddd !important; /* Cinza claro para as bolinhas inativas */
+  opacity: 1 !important;
+}
+
+/* Altera a cor da bolinha ativa para verde */
+.swiper-pagination-bullet-active {
+  background-color: #00d400 !important; /* Verde */
+}
+
+/* Ajustando o tamanho do ícone manualmente */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 24px !important; /* Define o tamanho do ícone */
+}
+
+/* Ajustando a aparência das setas */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #00d400 !important; /* Define a cor das setas como verde */
+    border-radius: 50%;
+    width: 40px;  /* Define um tamanho adequado para as setas */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajusta a posição das setas para ficarem dentro do slide */
+.swiper-button-prev {
+    left: 10px;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+
+
+
+
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .planos-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+}

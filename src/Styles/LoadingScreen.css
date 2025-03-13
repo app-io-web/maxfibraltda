@@ -1,0 +1,86 @@
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 9999;
+  }
+  
+  /* Linhas que vêm das bordas para o centro */
+  .loading-line {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    background: black;
+  }
+  
+  .loading-line.left {
+    left: 0;
+    width: 50vw;
+    transform: translateY(-50%);
+  }
+  
+  .loading-line.right {
+    right: 0;
+    width: 50vw;
+    transform: translateY(-50%);
+  }
+  
+  /* Círculo ao redor da logo */
+  .loading-circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid rgb(41, 212, 7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    z-index: 10;
+  }
+  
+  .loading-circle img {
+    width: 50px;
+    height: auto;
+  }
+  
+  /* Portas que abrem horizontalmente */
+  .loading-door {
+    position: absolute;
+    width: 50%;
+    height: 100vh;
+    background: white;
+    z-index: 999;
+  }
+  
+  .loading-door.left {
+    left: 0;
+  }
+  
+  .loading-door.right {
+    right: 0;
+  }
+  
+  /* Adicionando uma transição suave */
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  
+  /* Faz o loading sumir suavemente após a animação */
+  .loading-container.fade-out {
+    animation: fadeOut 0.8s ease-in-out forwards;
+  }
+  

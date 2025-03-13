@@ -1,0 +1,21 @@
+.banner-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Ajuste para telas 4K */
+@media screen and (min-width: 3840px) {
+  .banner-image {
+    max-height: 800px;
+  }
+}
