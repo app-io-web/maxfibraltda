@@ -277,14 +277,24 @@
   }
 
   .slider-container {
-    width: 85%;
-    height: 95%;
-    top: 5%;
-    left: 7.5%;
+    width: 74%;
+    height: 89%;
+    top: 13%;
+    left: 14.5%;
   }
 
   .app-screenshot {
     border-radius: 35px;
+  }
+  .mockup-bg {
+    position: absolute;
+    width: 77%;  /* 🔹 Ajuste para alinhar ao mockup */
+    height: 89%;
+    top: 12%;
+    left: 12%;
+    background: white; /* 🔥 Define o fundo branco */
+    border-radius: 40px; /* 🔹 Mantém as bordas arredondadas */
+    z-index: 1; /* 🔥 Fica atrás do app-screenshot */
   }
 }
 
