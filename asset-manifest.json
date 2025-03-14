@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.8126d5d4.css",
+    "main.css": "/static/css/main.47fac262.css",
     "main.js": "/static/js/main.3776ff0f.js",
     "static/media/MOCKUP-2---PLAYSTORE.png": "/static/media/MOCKUP-2---PLAYSTORE.6a867efa490e3866899c.png",
     "static/media/MOCKUP-2---APPLESTORE.png": "/static/media/MOCKUP-2---APPLESTORE.319bb0ffed9f5c0766c4.png",
@@ -18,11 +18,11 @@
     "static/media/logo.png": "/static/media/logo.cd6b355b7fa63bc309dc.png",
     "static/media/logo-text.svg": "/static/media/logo-text.1edfa63a11f4276a21789e39d8b58bfe.svg",
     "index.html": "/index.html",
-    "main.8126d5d4.css.map": "/static/css/main.8126d5d4.css.map",
+    "main.47fac262.css.map": "/static/css/main.47fac262.css.map",
     "main.3776ff0f.js.map": "/static/js/main.3776ff0f.js.map"
   },
   "entrypoints": [
-    "static/css/main.8126d5d4.css",
+    "static/css/main.47fac262.css",
     "static/js/main.3776ff0f.js"
   ]
 }
