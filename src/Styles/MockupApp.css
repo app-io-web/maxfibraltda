@@ -1,0 +1,293 @@
+.mockup-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 5%;
+}
+
+.mockup-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+.text-content h3 {
+  color: #00d400;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.text-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.text-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.text-content ul li {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.mockup-wrapper {
+  position: relative;
+  width: 320px; /* Largura fixa para manter o tamanho do mockup */
+  height: 650px; /* Altura fixa do mockup */
+  display: flex;
+  justify-content: center;
+}
+
+.mockup-img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2; /* Mantém o mockup sempre na frente */
+}
+
+.slider-container {
+  position: absolute;
+  width: 78%;
+  height: 90%;
+  top: 11%;
+  left: 12%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 🔥 Ajuste para arredondar os cantos da imagem dentro do mockup */
+.app-screenshot {
+  width: 98%;
+  height: 87%;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+/* 📌 MEDIA QUERIES PARA TELAS MENORES */
+@media (max-width: 1024px) {
+  .mockup-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-content {
+    max-width: 90%;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .mockup-wrapper {
+    width: 280px;
+    height: 580px;
+  }
+  .app-screenshot {
+    width: 98%;
+    height: 87%;
+    object-fit: cover;
+    border-radius: 31px;
+}
+  .slider-container {
+      position: absolute;
+      width: 79%;
+      height: 89%;
+      top: 10%;
+      left: 11%;
+      overflow: hidden;
+      z-index: 1;
+    }
+  
+}
+
+@media (max-width: 768px) {
+  .mockup-container {
+    padding: 30px 5%;
+  }
+
+  .mockup-wrapper {
+    width: 250px;
+    height: 520px;
+  }
+
+
+  .app-screenshot {
+    width: 98%;
+    height: 85%;
+    object-fit: cover;
+    border-radius: 31px;
+}
+  .slider-container {
+      position: absolute;
+      width: 79%;
+      height: 87%;
+      top: 10%;
+      left: 11%;
+      overflow: hidden;
+      z-index: 1;
+    }
+}
+
+@media (max-width: 480px) {
+  .mockup-container {
+    padding: 20px 5%;
+    text-align: center;
+  }
+
+  .text-content h3 {
+    font-size: 18px;
+  }
+
+  .text-content h2 {
+    font-size: 22px;
+  }
+
+  .text-content ul {
+    font-size: 14px;
+  }
+
+  .mockup-wrapper {
+    width: 220px;
+    height: 480px;
+  }
+
+  .slider-container {
+    width: 82%;
+    height: 85%;
+    top: 12%;
+    left: 9%;
+  }
+
+  .app-screenshot {
+    border-radius: 18px;
+  }
+}
+
+
+/* 📌 Ajuste para telas maiores (2K e 4K) */
+@media (min-width: 1600px) {
+  .mockup-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .text-content {
+    max-width: 45%;
+    font-size: 20px;
+  }
+
+  .mockup-wrapper {
+    width: 400px;
+    height: 800px;
+  }
+
+  .slider-container {
+    width: 80%;
+    height: 92%;
+    top: 11%;
+    left: 11%;
+}
+
+  .app-screenshot {
+    border-radius: 39px;
+  }
+}
+
+/* 📌 Ajuste para telas 4K (Ultra HD) */
+@media (min-width: 2560px) {
+  .mockup-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 100px 5%;
+  }
+
+  .text-content {
+    max-width: 50%;
+    font-size: 24px;
+  }
+
+  .text-content h3 {
+    font-size: 28px;
+  }
+
+  .text-content h2 {
+    font-size: 36px;
+  }
+
+  .text-content ul {
+    font-size: 20px;
+  }
+
+  .mockup-wrapper {
+    width: 500px;
+    height: 1000px;
+  }
+
+  .slider-container {
+    width: 85%;
+    height: 95%;
+    top: 5%;
+    left: 7.5%;
+  }
+
+  .app-screenshot {
+    border-radius: 35px;
+  }
+}
+
+
+
+/* 📌 Estilos para o modo mobile */
+@media (max-width: 768px) {
+  .mobile-layout {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 5%;
+  }
+
+  .info-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .info-card h3 {
+    font-size: 18px;
+    color: #00d400;
+    font-weight: bold;
+  }
+
+  .info-card h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .info-card ul {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+  }
+
+  .info-card ul li {
+    margin-bottom: 8px;
+  }
+
+  .mockup-wrapper {
+    width: 280px;
+    height: 550px;
+  }
+
+  .slider-container {
+    width: 79%;
+    height: 94%;
+    top: 12%;
+    left: 12%;
+}
+}

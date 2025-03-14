@@ -63,19 +63,117 @@
   font-size: 18px;
 }
 
-/* Botão */
+
+
+
+
+
+
+/* Estilo do botão com animação */
 .botao-beneficios {
-  background: black;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  font-size: 16px;
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #000;
   cursor: pointer;
-  margin-top: 20px;
-  transition: 0.3s;
-  border-radius: 10px;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  outline: none;
+  overflow: visible;
+  padding: 1.25em 2em;
+  margin-top: 33px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 16px;
 }
 
+/* Linha horizontal inicial */
+.botao-beneficios::before {
+  content: " ";
+  width: 1.5625rem;
+  height: 2px;
+  background: rgb(0, 0, 0);
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+/* Texto do botão */
+.botao-beneficios .text {
+  font-size: 0.8em;
+  /* line-height: 1.33333em; */
+  padding-left: 2em;
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+/* Linhas superiores e inferiores */
+.botao-beneficios .top-key {
+  height: 2px;
+  width: 1.5625rem;
+  top: -2px;
+  left: 0.625rem;
+  position: absolute;
+  background: #e8e8e8;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.botao-beneficios .bottom-key-1 {
+  height: 2px;
+  width: 1.5625rem;
+  right: 1.875rem;
+  bottom: -2px;
+  position: absolute;
+  background: #e8e8e8;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.botao-beneficios .bottom-key-2 {
+  height: 2px;
+  width: 0.625rem;
+  right: 0.625rem;
+  bottom: -2px;
+  position: absolute;
+  background: #e8e8e8;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+/* Efeito ao passar o mouse */
 .botao-beneficios:hover {
-  background: #04bb14;
+  color: white;
+  background: rgb(16, 190, 0);
+}
+
+.botao-beneficios:hover::before {
+  width: 0.9375rem;
+  background: white;
+}
+
+.botao-beneficios:hover .text {
+  color: white;
+  padding-left: 1.5em;
+}
+
+.botao-beneficios:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.botao-beneficios:hover .bottom-key-1,
+.botao-beneficios:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
 }

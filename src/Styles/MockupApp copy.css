@@ -1,0 +1,88 @@
+.mockup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+
+.mockup-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 36%;
+  gap: 30px;
+}
+
+
+.text-content {
+  max-width: 500px;
+}
+
+.text-content h3 {
+  color: #00d400;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.text-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.text-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.text-content ul li {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.mockup-wrapper {
+  position: relative;
+  width: 300px; /* Ajuste conforme o tamanho do mockup */
+  height: 600px; /* Ajuste conforme o tamanho do mockup */
+}
+
+
+
+/* Efeito Fade-In */
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.8s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.mockup-img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2; /* Mantém o mockup sempre na frente */
+}
+
+.slider-container {
+  position: absolute;
+  width: 78%;
+  height: 91%;
+  top: 13%;
+  left: 11%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 🔥 Ajuste para arredondar os cantos da imagem dentro do mockup */
+.app-screenshot {
+  width: 98%;
+  height: 87%;
+  object-fit: cover;
+  border-radius: 25px;
+}

@@ -1,0 +1,102 @@
+.download-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 180px;
+    height: 50px;
+    margin-top: 20px; /* Ajusta o espaçamento superior */
+}
+
+
+/* Garante que o botão centralize */
+.text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+  .download-button {
+    width: 100%;
+    height: 50px;
+    background-color: #00d400;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .download-buttons-container.hovered {
+    width: 220px; /* Expande ao passar o mouse */
+    transition: width 0.3s ease-in-out;
+  }
+  
+  /* Oculta os botões até o hover */
+  .download-options {
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .download-buttons-container.hovered .download-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Botão para Android */
+  .android {
+    background-color: #3ddc84;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .android:hover {
+    background-color: #2ca767;
+  }
+  
+  /* Botão para iOS */
+  .ios {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .ios:hover {
+    background-color: #333;
+  }
+  
+/* Responsividade */
+@media (max-width: 768px) {
+    .download-buttons-container {
+        width: 150px;
+        margin: 20px auto; /* Centraliza no mobile */
+    }
+}
+  

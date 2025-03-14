@@ -8,6 +8,7 @@ import '../../Styles/Planos.css';
 import '../../Styles/PlanosBackground.css';
 
 
+
 function Planos() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [maisVendido, setMaisVendido] = useState(null);
@@ -36,7 +37,7 @@ function Planos() {
       {isMobile ? (
         <PlanosSlider /> // Exibe o carrossel no mobile
       ) : (
-        <div className="planos-container">
+        <div id="planos"  className="planos-container">
           <Turbo maisVendido={maisVendido?.turbo.maisVendido} />
           <Infinity maisVendido={maisVendido?.infinity.maisVendido} />
           <Gold maisVendido={maisVendido?.gold.maisVendido} />

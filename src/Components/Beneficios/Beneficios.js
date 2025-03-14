@@ -3,6 +3,7 @@ import BeneficioCard from "./BeneficioCard";
 import { FaCheckCircle } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { animate } from "framer-motion";
 import "swiper/css";
 
 // Importando corretamente o Lottie
@@ -40,6 +41,17 @@ const Beneficios = () => {
     "Equipe Especialista",
     "Sem Burocracia"
   ];
+
+  const scrollToPlanos = () => {
+    const section = document.getElementById("planos");
+  
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  
+  
+  
 
   return (
     <div className="beneficios-container">
@@ -88,7 +100,16 @@ const Beneficios = () => {
               ))}
             </div>
 
-            <button className="botao-beneficios">CONTRATE AGORA MESMO</button>
+            <button className="botao-beneficios" onClick={scrollToPlanos}>
+            <span class="top-key"></span>
+            <span class="text">CONTRATE AGORA MESMO</span>
+            <span class="bottom-key-1"></span>
+            <span class="bottom-key-2"></span>
+          </button>
+
+
+
+
           </div>
         )}
       </div>
