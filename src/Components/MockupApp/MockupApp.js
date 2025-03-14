@@ -4,6 +4,10 @@ import "../../Styles/MockupApp.css";
 import mockupImg from "../../Assets/Mockup/MOCKUP.png";
 import DownloadButtons from "../DownloadButtons"; // Ajuste o caminho conforme necessário
 
+import mockupImgApple from "../../Assets/Mockup/imgs/MockupsSecudary/MOCKUP-2---APPLESTORE.png";
+import mockupImgPlay from "../../Assets/Mockup/imgs/MockupsSecudary/MOCKUP-2---PLAYSTORE.png";
+
+
 
 // Importação dinâmica das imagens dentro da pasta 'imgs'
 const imagesContext = require.context("../../Assets/Mockup/imgs", false, /\.(png|jpe?g|svg)$/);
@@ -41,24 +45,55 @@ const MockupApp = () => {
           <DownloadButtons />
       </div>
 
-      {/* 🔥 Animação do Mockup ao entrar na tela */}
       <motion.div 
-        className="mockup-wrapper"
-        initial={{ opacity: 0, y: 50 }} // Começa invisível e mais abaixo
-        whileInView={{ opacity: 1, y: 0 }} // Aparece ao entrar na tela
-        transition={{ duration: 0.8, ease: "easeOut" }} // Tempo da animação
-        viewport={{ once: true, amount: 0.3 }} // Ativa uma vez quando 30% visível
-      >
-        <img src={mockupImg} alt="Mockup do App" className="mockup-img" />
+  className="mockup-wrapper"
+  initial={{ opacity: 0, y: 50 }} 
+  whileInView={{ opacity: 1, y: 0 }} 
+  transition={{ duration: 0.8, ease: "easeOut" }} 
+  viewport={{ once: true, amount: 0.3 }} 
+>
+  {/* 🔹 Mockups secundários inclinados */}
+  <motion.img 
+    src={mockupImgApple} 
+    alt="Mockup Apple Store"
+    className="mockup-secondary apple"
+    initial={{ opacity: 0, rotate: -15, x: -50 }} 
+    whileInView={{ opacity: 1, rotate: -10, x: 0 }} 
+    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+  />
 
-        <div className={`slider-container ${fade ? "fade-in" : "fade-out"}`}>
-          <img
-            src={appScreenshots[currentImageIndex]}
-            alt="Tela do aplicativo"
-            className="app-screenshot"
-          />
-        </div>
-      </motion.div>
+  <motion.img 
+    src={mockupImgPlay} 
+    alt="Mockup Play Store"
+    className="mockup-secondary play"
+    initial={{ opacity: 0, rotate: 15, x: 50 }} 
+    whileInView={{ opacity: 1, rotate: 10, x: 0 }} 
+    transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+  />
+
+  {/* 🔹 Fundo Branco Dentro do Mockup */}
+  <div className="mockup-bg"></div>
+
+  {/* 🔹 Mockup principal */}
+  <img src={mockupImg} alt="Mockup do App" className="mockup-img" />
+
+  {/* 🔄 Slider de Imagens do App */}
+  <div className="slider-container">
+    <motion.img
+      key={currentImageIndex}
+      src={appScreenshots[currentImageIndex]}
+      alt="Tela do aplicativo"
+      className="app-screenshot"
+      initial={{ x: "100%", opacity: 0 }}
+      animate={{ x: "0%", opacity: 1 }}
+      exit={{ x: "-100%", opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+    />
+  </div>
+</motion.div>
+
+
+
     </section>
   );
 };

@@ -69,6 +69,55 @@
   border-radius: 25px;
 }
 
+
+
+
+
+/* 🔹 Imagens secundárias atrás do mockup principal */
+.mockup-secondary {
+  position: absolute;
+  width: 85%; /* Redimensiona para caber atrás */
+  top: 5%;
+  z-index: 0; /* Fica atrás do mockup principal */
+  opacity: 0.7;
+}
+
+/* 🔹 Ajuste individual de cada mockup */
+.apple {
+  left: -159px; /* Posiciona mais para a esquerda */
+  transform: rotate(342deg);
+}
+
+.play {
+  right: -189px;
+  transform: rotate(10deg);
+  width: 96%;
+}
+
+/* 🔥 Animação de fade-in */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+
+/* 🔥 Fundo Branco Dentro do Mockup */
+.mockup-bg {
+  position: absolute;
+  width: 77%;  /* 🔹 Ajuste para alinhar ao mockup */
+  height: 89%;
+  top: 11%;
+  left: 12%;
+  background: white; /* 🔥 Define o fundo branco */
+  border-radius: 25px; /* 🔹 Mantém as bordas arredondadas */
+  z-index: 1; /* 🔥 Fica atrás do app-screenshot */
+}
+
 /* 📌 MEDIA QUERIES PARA TELAS MENORES */
 @media (max-width: 1024px) {
   .mockup-container {
@@ -239,6 +288,61 @@
   }
 }
 
+/* 🔹 Ajuste dos Mockups Secundários para Telas Menores */
+@media (max-width: 1024px) {
+  .mockup-secondary {
+    width: 70%; /* Reduz o tamanho das imagens secundárias */
+    opacity: 0.6; /* Suaviza a opacidade */
+  }
+
+  .apple {
+    left: -120px; /* Aproxima da tela principal */
+    transform: rotate(340deg);
+  }
+
+  .play {
+    right: -140px;
+    transform: rotate(15deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .mockup-secondary {
+    width: 60%; /* Reduz mais ainda para telas menores */
+    opacity: 0.5;
+  }
+
+  .apple {
+    left: -90px; /* Aproxima mais */
+    transform: rotate(335deg);
+  }
+
+  .play {
+    right: -100px;
+    transform: rotate(20deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .mockup-secondary {
+    width: 59%; /* Mockups bem menores */
+    opacity: 0.4;
+  }
+
+  .apple {
+    left: -58px;
+    transform: rotate(330deg);
+    width: 70%;
+  }
+
+  .play {
+    right: -68px;
+    transform: rotate(25deg);
+    width: 68%;
+  }
+}
+
+
 
 
 /* 📌 Estilos para o modo mobile */
@@ -280,14 +384,17 @@
   }
 
   .mockup-wrapper {
-    width: 280px;
+    width: 218px;
     height: 550px;
   }
 
   .slider-container {
     width: 79%;
-    height: 94%;
-    top: 12%;
+    height: 73%;
+    top: 10%;
     left: 12%;
 }
 }
+
+
+
