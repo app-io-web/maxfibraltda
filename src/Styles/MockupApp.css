@@ -62,6 +62,7 @@
   top: 0;
   left: 0;
   z-index: 2; /* Mantém o mockup sempre na frente */
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
 .slider-container {
@@ -80,6 +81,7 @@
   height: 87%;
   object-fit: cover;
   border-radius: 27px;
+  transition: opacity 1.5s ease-in-out;
 }
 
 
@@ -90,6 +92,7 @@
   top: 5%;
   z-index: 0; /* Fica atrás do mockup principal */
   opacity: 0.7;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 /* 🔥 Fundo Branco Dentro do Mockup */
 .mockup-bg {

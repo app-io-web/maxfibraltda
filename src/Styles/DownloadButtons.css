@@ -6,6 +6,7 @@
     width: 180px;
     height: 50px;
     margin-top: 20px; /* Ajusta o espaçamento superior */
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
 
 

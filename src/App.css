@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+body {
+  overflow: auto !important; /* 🔥 Permite o modal funcionar corretamente */
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

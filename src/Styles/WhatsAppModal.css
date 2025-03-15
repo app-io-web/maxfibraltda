@@ -1,0 +1,153 @@
+/* 🔥 Fundo escuro do modal (Mobile) */
+.whatsapp-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* 🔥 Caixa principal do modal */
+.whatsapp-modal-content {
+    position: relative;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease-in-out;
+    color: #000;
+    overflow: hidden;
+    border: none;
+}
+
+/* 🔥 Evitar zoom no mobile */
+@media (max-width: 768px) {
+    .whatsapp-modal-content input,
+    .whatsapp-modal-content select,
+    .whatsapp-modal-content textarea {
+        font-size: 16px;
+    }
+}
+/* 🔥 Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔥 Estilização do cabeçalho */
+.whatsapp-modal-content h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+/* 🔥 Labels dos campos */
+.whatsapp-modal-content label {
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* 🔥 Campos de entrada */
+.whatsapp-modal-content input,
+.whatsapp-modal-content select,
+.whatsapp-modal-content textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #000;
+    font-size: 14px;
+}
+
+/* 🔥 Placeholder dos inputs */
+.whatsapp-modal-content input::placeholder,
+.whatsapp-modal-content textarea::placeholder {
+    color: #666;
+}
+
+/* 🔥 Centralizar botões */
+.whatsapp-modal-button,
+.whatsapp-modal-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    max-width: 250px;
+    margin: 15px auto 0 auto;
+    cursor: pointer;
+}
+
+/* 🔥 Estilização do botão de WhatsApp */
+.whatsapp-modal-button {
+    background: #25D366;
+    color: white;
+    border: none;
+}
+
+.whatsapp-modal-button:hover {
+    background: #1ebe5d;
+}
+
+/* 🔥 Botão de fechar */
+.whatsapp-modal-close-btn {
+    background: #d9534f;
+    color: white;
+    border: none;
+}
+
+.whatsapp-modal-close-btn:hover {
+    background: #c9302c;
+}
+
+/* 🔥 Responsividade - Fundo escuro apenas no mobile */
+@media (max-width: 768px) {
+    .whatsapp-modal-content {
+        background: #141414;
+        color: white;
+        border: 2px solid #25D366;
+        width: 90%;
+    }
+    .whatsapp-modal-content h3 {
+        color: white;
+    }
+    .whatsapp-modal-content label {
+        color: white;
+    }
+    .whatsapp-modal-content input,
+    .whatsapp-modal-content select,
+    .whatsapp-modal-content textarea {
+        background: #1f1f1f;
+        border: 1px solid #444;
+        color: white;
+    }
+    .whatsapp-modal-content input::placeholder,
+    .whatsapp-modal-content textarea::placeholder {
+        color: #888;
+    }
+}

@@ -38,7 +38,6 @@ const MockupApp = () => {
           <li>Baixar a segunda via de faturas.</li>
           <li>Consultar o código de barras do boleto.</li>
           <li>Visualizar todo o seu histórico financeiro.</li>
-          <li>Realizar abertura de protocolo de atendimento.</li>
           <li>Verificar o consumo da sua conexão.</li>
         </ul>
           {/* Aqui entra os botões de download */}
@@ -79,17 +78,18 @@ const MockupApp = () => {
 
   {/* 🔄 Slider de Imagens do App */}
   <div className="slider-container">
-    <motion.img
-      key={currentImageIndex}
-      src={appScreenshots[currentImageIndex]}
-      alt="Tela do aplicativo"
-      className="app-screenshot"
-      initial={{ x: "100%", opacity: 0 }}
-      animate={{ x: "0%", opacity: 1 }}
-      exit={{ x: "-100%", opacity: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-    />
-  </div>
+      <motion.img
+        key={currentImageIndex}
+        src={appScreenshots[currentImageIndex]}
+        alt="Tela do aplicativo"
+        className="app-screenshot"
+        initial={{ opacity: 0.5 }}  // 🔹 Começa invisível
+        animate={{ opacity: 1 }}  // 🔹 Aparece gradualmente
+        exit={{ opacity: 0 }}     // 🔹 Some suavemente
+        transition={{ duration: 1.5, ease: "easeInOut" }} // 🔥 Mais suave e fluido
+      />
+</div>
+
 </motion.div>
 
 

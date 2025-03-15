@@ -1,0 +1,101 @@
+/* 🔥 Fundo do modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out; /* 🔥 Suaviza a aparição */
+    -webkit-transform: translate3d(0, 0, 0); /* 🔥 Garante renderização correta no Chrome Android */    
+}
+
+/* 🔥 Modal Centralizado */
+.modal-content {
+    position: relative;
+    background: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+    color: white;
+    overflow: hidden !important;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+
+/* 🔥 Botões dentro do modal */
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* 🔥 Botões de download */
+.modal-download-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    justify-content: center;
+    color: white;
+}
+
+/* 🔹 Botão Android */
+.modal-download-btn.android {
+    background: #00ff00;
+}
+
+.modal-download-btn.android:hover {
+    background: #fbbc04;
+}
+
+/* 🔹 Botão iOS */
+.modal-download-btn.ios {
+    background: #0c0c0c;
+}
+
+.modal-download-btn.ios:hover {
+    background: #026ada;
+}
+
+/* 🔥 Botão de fechar */
+.modal-close-btn {
+    margin-top: 15px;
+    padding: 10px;
+    background: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-close-btn:hover {
+    background: #c9302c;
+}
+
+
+/* 🔥 Corrige centralização em iOS/Android */
+@media (max-width: 768px) {
+    .modal-content {
+        transform: none;
+        top: auto;
+        margin: auto;
+    }
+}

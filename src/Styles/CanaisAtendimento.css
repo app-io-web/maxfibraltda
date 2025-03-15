@@ -1,0 +1,229 @@
+.canais-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.canais-texto {
+    flex: 1;
+    text-align: left;
+}
+
+.canais-texto h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.canais-texto p {
+    font-size: 16px;
+    color: #555;
+}
+
+.canais-botoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    flex: 1;
+}
+
+/* 🔥 Estilização dos cards */
+.canal-wrapper {
+    position: relative; /* 🔥 Fundamental para o posicionamento correto dos botões */
+    display: flex;
+    align-items: center;
+}
+
+.canal-botao {
+    background: #0d1117;
+    color: white;
+    font-size: 11px;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    width: 160px;
+    height: 86px;
+}
+
+.canal-botao:hover {
+    transform: scale(1.1);
+}
+
+/* 🔹 Animação da borda ao passar o mouse */
+.canal-botao .border {
+    position: absolute;
+    inset: 0px;
+    border: 1px solid #00d400;
+    opacity: 0;
+    border-radius: 10px;
+    transform: rotate(10deg);
+    transition: all 0.5s ease-in-out;
+}
+
+.canal-botao:hover .border {
+    inset: 8px;
+    opacity: 1;
+    transform: rotate(0);
+}
+
+/* 🔥 Ícones nos cards */
+.icon {
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.canal-botao:hover .icon {
+    color: #00d400;
+    transform: scale(1.2);
+}
+
+/* 🔥 Botões de download ao lado */
+.download-buttons-canais {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0%;
+    left: 95%;
+    transform: translateY(-50%);
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+/* 🔥 Exibe os botões ao clicar */
+.canal-wrapper.active .download-buttons-canais {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 🔥 Animação de entrada dos botões */
+.canais-download-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+/* 🔥 Aparecem um depois do outro */
+.canal-wrapper.active .canais-android {
+    animation: fadeInMove 0.3s ease-out forwards 0.1s; /* Primeiro botão */
+}
+
+.canal-wrapper.active .canais-ios {
+    animation: fadeInMove 0.3s ease-out forwards 0.3s; /* Segundo botão */
+}
+
+/* 🔥 Keyframes da animação */
+@keyframes fadeInMove {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+/* 🔹 Botão Android */
+.canais-android {
+    background: #00ff00;
+    color: #ffffff;
+}
+
+.canais-android:hover {
+    background: #ff9800;
+}
+
+/* 🔹 Botão iOS */
+.canais-ios {
+    background: #070707;
+    color: white;
+}
+
+.canais-ios:hover {
+    background: #0056b3;
+}
+
+/* 📌 Responsividade */
+@media (max-width: 768px) {
+    .canais-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .canais-botoes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        justify-content: center;
+    }
+
+    /* 🔹 Mantém os cards corretamente */
+    .canal-wrapper {
+        position: relative;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 🔥 Ajuste para os botões de download no mobile */
+    .download-buttons-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* 🔹 Ajusta os botões Android e iOS */
+    .canais-download-btn {
+        width: 100%;
+        max-width: 160px;
+        text-align: center;
+    }
+}
+
+/* 🔥 Ajuste para telas menores */
+@media (max-width: 480px) {
+    .canais-botoes {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .download-buttons-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .canais-download-btn {
+        width: 100%;
+        max-width: 160px;
+        text-align: center;
+    }
+}
+
+
+
+

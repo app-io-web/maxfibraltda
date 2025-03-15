@@ -7,6 +7,8 @@ import Planos from '../Components/Planos/Planos';
 import Beneficios from '../Components/Beneficios/Beneficios';
 import DuvidasFrequentes from "../Components/DuvidasFrequentes";
 import MockupApp from "../Components/MockupApp/MockupApp";
+import CanaisAtendimento from "../Components/CanaisAtendimento";
+
 
 
 import '../Styles/Home.css';
@@ -35,6 +37,7 @@ function Home() {
       <Planos />
       <DuvidasFrequentes />
       <MockupApp />
+      <CanaisAtendimento />
       </main>
     </div>
   );
