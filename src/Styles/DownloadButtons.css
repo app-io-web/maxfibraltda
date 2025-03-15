@@ -58,7 +58,7 @@
   
   /* Botão para Android */
   .android {
-    background-color: #3ddc84;
+    background-color: #07d63b;
     color: white;
     border-radius: 10px;
     padding: 10px 15px;
@@ -71,7 +71,7 @@
   }
   
   .android:hover {
-    background-color: #2ca767;
+    background-color: #fbbc04;
   }
   
   /* Botão para iOS */
@@ -89,8 +89,9 @@
   }
   
   .ios:hover {
-    background-color: #333;
+    background-color: #0074dc;
   }
+
   
 /* Responsividade */
 @media (max-width: 768px) {

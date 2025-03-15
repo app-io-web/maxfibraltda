@@ -1,17 +1,30 @@
 .mockup-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px 5%;
-}
-
-.mockup-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   width: 100%;
+  background: #0d1117;
+  display: flex;
+  justify-content: center; /* 🔹 Centraliza o conteúdo */
+  align-items: center;
+  padding: 80px 0; /* 🔹 Espaço interno para evitar corte */
+  position: relative; /* 🔹 Permite ajustes de posição */
+  border-radius: 20px;
 }
 
+.mockup-container {
+  display: flex;
+  align-items: center;
+  /* width: 100%; */
+  padding: 50px 5%;
+  background: #0d1117;
+  justify-content: space-around;
+
+}
+.text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
 
 .text-content h3 {
   color: #00d400;
@@ -66,11 +79,8 @@
   width: 98%;
   height: 87%;
   object-fit: cover;
-  border-radius: 25px;
+  border-radius: 27px;
 }
-
-
-
 
 
 /* 🔹 Imagens secundárias atrás do mockup principal */
@@ -81,6 +91,21 @@
   z-index: 0; /* Fica atrás do mockup principal */
   opacity: 0.7;
 }
+/* 🔥 Fundo Branco Dentro do Mockup */
+.mockup-bg {
+  position: absolute;
+  width: 78%;
+  height: 78%;
+  top: 11%;
+  left: 12%;
+  background: #0d1117;
+  border-radius: 25px;
+  z-index: 1;
+}
+
+
+
+
 
 /* 🔹 Ajuste individual de cada mockup */
 .apple {
@@ -94,6 +119,15 @@
   width: 96%;
 }
 
+
+
+
+
+
+
+
+
+
 /* 🔥 Animação de fade-in */
 .fade-in {
   animation: fadeIn 1s ease-in-out;
@@ -106,17 +140,16 @@
 
 
 
-/* 🔥 Fundo Branco Dentro do Mockup */
-.mockup-bg {
-  position: absolute;
-  width: 77%;  /* 🔹 Ajuste para alinhar ao mockup */
-  height: 89%;
-  top: 11%;
-  left: 12%;
-  background: white; /* 🔥 Define o fundo branco */
-  border-radius: 25px; /* 🔹 Mantém as bordas arredondadas */
-  z-index: 1; /* 🔥 Fica atrás do app-screenshot */
-}
+
+
+
+
+
+
+
+
+
+
 
 /* 📌 MEDIA QUERIES PARA TELAS MENORES */
 @media (max-width: 1024px) {
@@ -124,6 +157,18 @@
     flex-direction: column;
     text-align: center;
   }
+
+  .mockup-container {
+    width: 100%;
+    background: #0d1117;
+    display: flex;
+    justify-content: center; /* 🔹 Centraliza o conteúdo */
+    align-items: center;
+    padding: 80px 0; /* 🔹 Espaço interno para evitar corte */
+    position: relative; /* 🔹 Permite ajustes de posição */
+    border-radius: 20px;
+  }
+  
 
   .text-content {
     max-width: 90%;
@@ -142,14 +187,14 @@
     border-radius: 31px;
 }
   .slider-container {
-      position: absolute;
-      width: 79%;
-      height: 89%;
-      top: 10%;
-      left: 11%;
-      overflow: hidden;
-      z-index: 1;
-    }
+    position: absolute;
+    width: 79%;
+    height: 87%;
+    top: 12%;
+    left: 11%;
+    overflow: hidden;
+    z-index: 1;
+  }
   
 }
 
@@ -219,9 +264,20 @@
 
 /* 📌 Ajuste para telas maiores (2K e 4K) */
 @media (min-width: 1600px) {
+
   .mockup-container {
-    max-width: 1400px;
-    margin: 0 auto;
+    text-align: center;
+    gap: 23vh;
+  }
+  .mockup-container {
+    width: 100%;
+    background: #0d1117;
+    display: flex;
+    justify-content: center; /* 🔹 Centraliza o conteúdo */
+    align-items: center;
+    padding: 80px 0; /* 🔹 Espaço interno para evitar corte */
+    position: relative; /* 🔹 Permite ajustes de posição */
+    border-radius: 20px;
   }
 
   .text-content {
@@ -246,12 +302,36 @@
   }
 }
 
+
+
 /* 📌 Ajuste para telas 4K (Ultra HD) */
 @media (min-width: 2560px) {
   .mockup-container {
-    max-width: 1800px;
+    width: 100%;
+    background: #0d1117;
+    display: flex;
+    justify-content: center; /* 🔹 Centraliza o conteúdo */
+    align-items: center;
+    padding: 80px 0; /* 🔹 Espaço interno para evitar corte */
+    position: relative; /* 🔹 Permite ajustes de posição */
+    border-radius: 20px;
+  }
+
+  .mockup-container {
+    max-width: 100%;
     margin: 0 auto;
     padding: 100px 5%;
+}
+
+  
+  .mockup-container {
+    display: flex;
+    align-items: center;
+    /* width: 100%; */
+    padding: 50px 5%;
+    background: #0d1117;
+    justify-content: space-around;
+  
   }
 
   .text-content {
@@ -277,25 +357,25 @@
   }
 
   .slider-container {
-    width: 74%;
-    height: 89%;
+    width: 75%;
+    height: 90%;
     top: 13%;
-    left: 14.5%;
-  }
+    left: 13.5%;
+}
 
   .app-screenshot {
     border-radius: 35px;
   }
   .mockup-bg {
     position: absolute;
-    width: 77%;  /* 🔹 Ajuste para alinhar ao mockup */
-    height: 89%;
-    top: 12%;
-    left: 12%;
-    background: white; /* 🔥 Define o fundo branco */
-    border-radius: 40px; /* 🔹 Mantém as bordas arredondadas */
-    z-index: 1; /* 🔥 Fica atrás do app-screenshot */
-  }
+    width: 75% !important;
+    height: 76% !important;
+    top: 13% !important;
+    left: 13% !important;
+    background: #0d1117;
+    border-radius: 25px !important;
+    z-index: 1;
+}
 }
 
 /* 🔹 Ajuste dos Mockups Secundários para Telas Menores */
@@ -357,6 +437,24 @@
 
 /* 📌 Estilos para o modo mobile */
 @media (max-width: 768px) {
+  .mockup-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .mockup-container {
+    width: 100%;
+    height: 100%;
+    background: #0d1117;
+    display: flex;
+    justify-content: center; /* 🔹 Centraliza o conteúdo */
+    align-items: center;
+    padding: 80px 0; /* 🔹 Espaço interno para evitar corte */
+    position: relative; /* 🔹 Permite ajustes de posição */
+    border-radius: 20px;
+  }
+
   .mobile-layout {
     flex-direction: column;
     text-align: center;
@@ -364,7 +462,7 @@
   }
 
   .info-card {
-    background: #ffffff;
+    background: #ffffff !;
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
@@ -399,11 +497,22 @@
   }
 
   .slider-container {
-    width: 79%;
-    height: 73%;
+    width: 77%;
+    height: 72%;
     top: 10%;
     left: 12%;
 }
+
+  .mockup-bg {
+    position: absolute;
+    width: 78%;
+    height: 62%;
+    top: 9%;
+    left: 12%;
+    background: #0d1117;
+    border-radius: 25px;
+    z-index: 1;
+  }
 }
 
 
