@@ -78,6 +78,12 @@
     font-size: 14px;
 }
 
+.whatsapp-modal-content textarea{
+    height: 150px !important;
+    width: 324px !important;
+
+}
+
 /* 🔥 Placeholder dos inputs */
 .whatsapp-modal-content input::placeholder,
 .whatsapp-modal-content textarea::placeholder {
@@ -145,6 +151,12 @@
         background: #1f1f1f;
         border: 1px solid #444;
         color: white;
+    }
+
+    .whatsapp-modal-content textarea{
+        height: 65px !important;
+        width: 100% !important;
+    
     }
     .whatsapp-modal-content input::placeholder,
     .whatsapp-modal-content textarea::placeholder {

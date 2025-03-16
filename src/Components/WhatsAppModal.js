@@ -63,10 +63,10 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
 
     const handleChange = (e) => {
       const { name, value } = e.target;
-
       setFormData({
           ...formData,
-          [name]: name === "cpf" ? formatarCpfCnpj(value) : value, // Aplica a formatação apenas no CPF/CNPJ
+          [name]: name === "cpf" ? formatarCpfCnpj(value) : 
+                  name === "telefone" ? formatPhoneNumber(value) : value,
       });
     };
 
@@ -88,6 +88,20 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
       }
 
       return valor;
+    };
+
+    // Formatar telefone (XX) XXXXX-XXXX dinamicamente
+    const formatPhoneNumber = (value) => {
+        value = value.replace(/\D/g, ""); // Remove tudo que não for número
+        value = value.substring(0, 11); // Limita a 11 dígitos
+
+        if (value.length > 2) {
+            value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+        }
+        if (value.length > 10) {
+            value = `${value.substring(0, 10)}-${value.substring(10)}`;
+        }
+        return value;
     };
 
   
@@ -142,7 +156,7 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
     const textoFormatado = `*Protocolo:* ${protocolo}%0A%0A` +  // Adiciona o protocolo
                            `*Nome:* ${nome}%0A` +
                            `*CPF:* ${cpf}%0A` +
-                           `*Telefone:* +55${telefone}%0A` +
+                           `*Telefone:* +55 ${telefone}%0A` +
                            `*E-mail:* ${email}%0A%0A` +
                            `*Departamento:* ${departamento}%0A` +
                            `*Mensagem:* ${mensagem}`;
@@ -190,8 +204,8 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
                 />
 
                 <label>Telefone</label>
-                <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="Digite seu telefone" />
-    
+                <input type="tel" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="Digite seu telefone" maxLength="15" />
+
                 <label>E-mail</label> {/* Novo campo de e-mail */}
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Digite seu e-mail" />
     
@@ -205,8 +219,15 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
                 </select>
     
                 <label>Mensagem</label>
-                <textarea name="mensagem" value={formData.mensagem} onChange={handleChange} placeholder="Digite sua mensagem"></textarea>
-    
+                  <textarea
+                    name="mensagem"
+                    value={formData.mensagem}
+                    onChange={handleChange}
+                    placeholder="Digite sua mensagem"
+                    maxLength={150} // 🔹 Limita a 150 caracteres
+                  ></textarea>
+                  <small>{formData.mensagem.length}/150 caracteres</small> {/* 🔹 Exibe o contador */}
+
                 <button 
                     className="whatsapp-modal-button" 
                     onClick={handleSendMessage} 

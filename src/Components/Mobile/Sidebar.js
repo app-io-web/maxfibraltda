@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from "react";
+import { HashRouter as Router, Link, useLocation } from "react-router-dom";
 import "../../Styles/Mobile/Sidebar.css";
 import SocialMediaFooter from "./SocialMediaFooter";
 
 function Sidebar({ isOpen, toggleSidebar }) {
-  const sidebarRef = useRef(null); // Criando referência para o sidebar
+  const sidebarRef = useRef(null);
+  const location = useLocation(); // Pegando a URL atual
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        toggleSidebar(); // Fecha o sidebar se o clique for fora dele
+        toggleSidebar();
       }
     }
 
@@ -26,14 +28,33 @@ function Sidebar({ isOpen, toggleSidebar }) {
       <button className="close-btn" onClick={toggleSidebar}>×</button>
       
       <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Cadastre-se</a></li>
-        <li><a href="#">Sobre Nós</a></li>
-        <li><a href="#">Empresas</a></li>
-        <li><a href="#">Trabalhe Conosco</a></li>
+        <li>
+          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+            Início
+          </Link>
+        </li>
+        <li>
+          <Link to="/cadastro" className={location.pathname === "/cadastro" ? "active" : ""}>
+            Cadastre-se
+          </Link>
+        </li>
+        <li>
+          <Link to="/sobre" className={location.pathname === "/sobre" ? "active" : ""}>
+            Sobre Nós
+          </Link>
+        </li>
+        <li>
+          <Link to="/empresas" className={location.pathname === "/empresas" ? "active" : ""}>
+            Empresas
+          </Link>
+        </li>
+        <li>
+          <Link to="/trabalhe-conosco" className={location.pathname === "/trabalhe-conosco" ? "active" : ""}>
+            Trabalhe Conosco
+          </Link>
+        </li>
       </ul>
 
-      {/* Botão fora da lista para evitar desalinhamento */}
       <a
         href="https://ixc.maxfibraltda.com.br/"
         target="_blank"

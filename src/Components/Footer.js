@@ -66,7 +66,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>CNPJ: 14.935.962-0001-47 - MAX TECNOLOGIA E TELECOMUNICACAO - MTT LTDA</p>
+        <p> © 2025 CNPJ: 14.935.962-0001-47 - MAX TECNOLOGIA E TELECOMUNICACAO - MTT LTDA</p>
       </div>
     </footer>
   );

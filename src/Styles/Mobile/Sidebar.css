@@ -61,6 +61,10 @@
   text-decoration: none;
 }
 
+.sidebar ul li a.active {
+  background: rgba(6, 175, 82, 0.2);
+}
+
 
 
 
