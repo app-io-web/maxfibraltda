@@ -6,74 +6,159 @@ import "../Styles/WhatsAppModal.css";
 import { FaWhatsapp } from "react-icons/fa";
 import { fetchWhatsAppNumber } from "../Services/whatsappService";
 import { enviarMensagemWhatsApp } from "../Services/EnvioWhatsappOpa";
+import { enviarEmailAtendimento } from "../Services/emailService"; // Importando o novo service de e-mail
 
 const WhatsAppModal = ({ isOpen, onClose }) => {
     const [whatsappNumber, setWhatsappNumber] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false); // 🔹 Estado para controlar o loading
+    const [protocolo, setProtocolo] = useState(""); // Novo estado para armazenar o protocolo
     const [formData, setFormData] = useState({
       nome: "",
       cpf: "",
       telefone: "",
+      email: "", // Novo campo de e-mail
       mensagem: "",
       departamento: ""
     });
     const [successModal, setSuccessModal] = useState(false);
     const [errorModal, setErrorModal] = useState(false);
     
+
     useEffect(() => {
       const loadWhatsAppNumber = async () => {
-        setLoading(true);
-        const numero = await fetchWhatsAppNumber();
-        if (numero) setWhatsappNumber(numero);
-        setLoading(false);
+          setLoading(true);
+          const numero = await fetchWhatsAppNumber();
+          if (numero) setWhatsappNumber(numero);
+          setLoading(false);
       };
   
       if (isOpen) {
-        loadWhatsAppNumber();
+          loadWhatsAppNumber();
+          
+          // 🔹 Resetando o formulário ao abrir o modal
+          setFormData({
+              nome: "",
+              cpf: "",
+              telefone: "",
+              email: "",
+              mensagem: "",
+              departamento: ""
+          });
       }
-    }, [isOpen]);
+  }, [isOpen]); // 🔹 O modal será resetado sempre que `isOpen` mudar
   
+
+  const handleCloseModal = () => {
+    setFormData({
+        nome: "",
+        cpf: "",
+        telefone: "",
+        email: "",
+        mensagem: "",
+        departamento: ""
+    });
+    onClose();
+};
+
+
     const handleChange = (e) => {
       const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
-  
-    const handleSendMessage = async () => {
-      try {
-          const { nome, telefone, departamento, mensagem } = formData;
-          if (!nome || !telefone || !departamento) {
-              alert("Preencha todos os campos obrigatórios, incluindo o departamento");
-              return;
-          }
-          const response = await enviarMensagemWhatsApp(nome, telefone, departamento, mensagem);
-          if (response.success) {
-              setSuccessModal(true);
-          } else {
-              setErrorModal(response.error || "Erro desconhecido.");
-          }
-      } catch (error) {
-          setErrorModal(error.message || "Falha ao enviar mensagem.");
-      }
+
+      setFormData({
+          ...formData,
+          [name]: name === "cpf" ? formatarCpfCnpj(value) : value, // Aplica a formatação apenas no CPF/CNPJ
+      });
     };
 
-    const handleCloseSuccessModal = () => {
-      setSuccessModal(false);
-      onClose();
-      const { nome, cpf, telefone, mensagem, departamento } = formData;
-      const textoFormatado = `Nome: ${nome}%0A` +
-                             `CPF: ${cpf}%0A` +
-                             `Telefone: ${telefone}%0A%0A` +
-                             `Mensagem: ${mensagem}%0A%0A` +
-                             `Departamento: ${departamento}`;
-      window.location.href = `https://wa.me/${whatsappNumber}?text=${textoFormatado}`;
+    // 🔹 Função para formatar CPF ou CNPJ automaticamente
+    const formatarCpfCnpj = (valor) => {
+      valor = valor.replace(/\D/g, ""); // Remove tudo que não for número
+
+      if (valor.length <= 11) {
+          // Formatar como CPF: XXX.XXX.XXX-XX
+          valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+          valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+          valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+      } else {
+          // Formatar como CNPJ: XX.XXX.XXX/XXXX-XX
+          valor = valor.replace(/^(\d{2})(\d)/, "$1.$2");
+          valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+          valor = valor.replace(/\.(\d{3})(\d)/, ".$1/$2");
+          valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
+      }
+
+      return valor;
     };
-    
+
+  
+
+
+
+
+    const handleSendMessage = async () => {
+      try {
+          setLoading(true); // 🔹 Bloqueia o botão e ativa o loading
+  
+          const { nome, cpf, telefone, email, departamento, mensagem } = formData;
+  
+          if (!nome || !telefone || !departamento || !email) {
+              alert("Preencha todos os campos obrigatórios, incluindo o e-mail e o departamento.");
+              setLoading(false); // 🔹 Desbloqueia o botão em caso de erro
+              return;
+          }
+  
+          // Enviar mensagem via WhatsApp
+          const response = await enviarMensagemWhatsApp(nome, telefone, departamento, mensagem);
+          
+          if (response.success) {
+              // Enviar e-mail com os detalhes do atendimento
+              const emailResponse = await enviarEmailAtendimento(nome, cpf, telefone, email, departamento, mensagem);
+  
+              console.log("Resposta da API de e-mail:", emailResponse);
+  
+              if (emailResponse.message && emailResponse.message.includes("sucesso")) {
+                  setProtocolo(emailResponse.protocolo); // Salva o protocolo retornado pela API
+                  setSuccessModal(true); // 🔹 Exibe o modal de sucesso sem fechar o modal do formulário
+              } else {
+                  setErrorModal("Erro ao enviar e-mail.");
+              }
+          } else {
+              setErrorModal(response.error || "Erro ao enviar mensagem.");
+          }
+      } catch (error) {
+          setErrorModal(error.message || "Falha ao processar o atendimento.");
+      } finally {
+          setLoading(false); // 🔹 Sempre desbloqueia o botão após o envio
+      }
+  };
+  
+  
+
+  const handleCloseSuccessModal = () => {
+    setSuccessModal(false);
+    onClose();
+    const { nome, cpf, telefone, email, mensagem, departamento } = formData;
+
+    const textoFormatado = `*Protocolo:* ${protocolo}%0A%0A` +  // Adiciona o protocolo
+                           `*Nome:* ${nome}%0A` +
+                           `*CPF:* ${cpf}%0A` +
+                           `*Telefone:* +55${telefone}%0A` +
+                           `*E-mail:* ${email}%0A%0A` +
+                           `*Departamento:* ${departamento}%0A` +
+                           `*Mensagem:* ${mensagem}`;
+
+    window.location.href = `https://wa.me/${whatsappNumber}?text=${textoFormatado}`;
+  };
+
+  
+
+
     const handleCloseErrorModal = () => {
-      setErrorModal(false);
+        setErrorModal(false);
     };
-  
+
     if (!isOpen) return null;
-  
+
     return (
       <>
         <div className="whatsapp-modal-overlay" onClick={onClose}>
@@ -86,11 +171,21 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
                 <label>Nome Completo</label>
                 <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Digite seu nome" />
     
-                <label>CPF</label>
-                <input type="text" name="cpf" value={formData.cpf} onChange={handleChange} placeholder="Digite seu CPF" />
-    
+                <label>CPF / CNPJ</label>
+                <input 
+                    type="text" 
+                    name="cpf" 
+                    value={formData.cpf} 
+                    onChange={handleChange} 
+                    placeholder="Digite seu CPF ou CNPJ" 
+                    maxLength="18" // Limite máximo de caracteres para CNPJ formatado
+                />
+
                 <label>Telefone</label>
                 <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="Digite seu telefone" />
+    
+                <label>E-mail</label> {/* Novo campo de e-mail */}
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Digite seu e-mail" />
     
                 <label>Departamento</label>
                 <select name="departamento" value={formData.departamento} onChange={handleChange}>
@@ -104,12 +199,24 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
                 <label>Mensagem</label>
                 <textarea name="mensagem" value={formData.mensagem} onChange={handleChange} placeholder="Digite sua mensagem"></textarea>
     
-                <button className="whatsapp-modal-button" onClick={handleSendMessage}>
-                  <FaWhatsapp /> Enviar via WhatsApp
+                <button 
+                    className="whatsapp-modal-button" 
+                    onClick={handleSendMessage} 
+                    disabled={loading} // 🔹 Botão desativado enquanto carrega
+                >
+                    {loading ? (
+                        <div className="loading-spinner"></div> // 🔹 Exibe o loading
+                    ) : (
+                        <>
+                            <FaWhatsapp /> Abrir Atendimento
+                        </>
+                    )}
                 </button>
+
               </>
             )}
-            <button className="whatsapp-modal-close-btn" onClick={onClose}>Fechar</button>
+            <button className="whatsapp-modal-close-btn" onClick={handleCloseModal}>Fechar</button>
+
           </div>
         </div>
         
@@ -119,14 +226,13 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
             <div className="whatsapp-modal-content" onClick={(e) => e.stopPropagation()}>
               <Player autoplay loop src={successAnimation} style={{ height: "120px", width: "120px" }} />
               <h3>Mensagem enviada com sucesso!</h3>
-              <p>Você será redirecionado para a conversa no WhatsApp.</p>
+              <p>Você será redirecionado para o WhatsApp e receberá um e-mail com os detalhes do atendimento.</p>
               <button className="whatsapp-modal-button" onClick={handleCloseSuccessModal}>Ok</button>
             </div>
           </div>
         )}
-        
-        {/* Modal de Erro */}
-        {errorModal && (
+         {/* Modal de Erro */}
+         {errorModal && (
           <div className="whatsapp-modal-overlay" onClick={handleCloseErrorModal}>
             <div className="whatsapp-modal-content" onClick={(e) => e.stopPropagation()}>
               <Player autoplay loop src={errorAnimation} style={{ height: "120px", width: "120px" }} />
@@ -136,6 +242,7 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
             </div>
           </div>
         )}
+
       </>
     );
 };
