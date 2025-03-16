@@ -165,7 +165,15 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
           <div className="whatsapp-modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>Abrir Atendimento</h3>
             {loading ? (
-              <p>Buscando número do WhatsApp...</p>
+                <div className="custom-loader-container">
+                <div className="custom-loader">
+                    <div className="custom-orbe" style={{ "--index": 0 }}></div>
+                    <div className="custom-orbe" style={{ "--index": 1 }}></div>
+                    <div className="custom-orbe" style={{ "--index": 2 }}></div>
+                    <div className="custom-orbe" style={{ "--index": 3 }}></div>
+                    <div className="custom-orbe" style={{ "--index": 4 }}></div>
+                </div>
+            </div>
             ) : (
               <>
                 <label>Nome Completo</label>
