@@ -7,3 +7,8 @@
     margin-top: 20px;
     font-size: 1.2em;
   }
+
+  .footer-wrapper{
+    margin-top: 30vh !important;
+    width: 100% !important;
+  }

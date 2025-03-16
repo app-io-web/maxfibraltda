@@ -8,6 +8,7 @@ import Beneficios from '../Components/Beneficios/Beneficios';
 import DuvidasFrequentes from "../Components/DuvidasFrequentes";
 import MockupApp from "../Components/MockupApp/MockupApp";
 import CanaisAtendimento from "../Components/CanaisAtendimento";
+import Footer from '../Components/Footer';
 
 
 
@@ -31,16 +32,20 @@ function Home() {
     <div className="home">
       {isMobile ? <MobileHeader /> : <Header />}
       <main className="content">
-      <BannerSlider />
-      <Beneficios />
-      <DynamicPhrase />
-      <Planos />
-      <DuvidasFrequentes />
-      <MockupApp />
-      <CanaisAtendimento />
+        <BannerSlider />
+        <Beneficios />
+        <DynamicPhrase />
+        <Planos />
+        <DuvidasFrequentes />
+        <MockupApp />
+        <CanaisAtendimento />
       </main>
+      <div className="footer-wrapper">
+        <Footer />
+      </div>
     </div>
   );
+  
 }
 
 export default Home;
