@@ -1,0 +1,50 @@
+.button-group {
+  display: flex; /* Garante que os botões fiquem na mesma linha */
+  justify-content: center; /* Centraliza os botões */
+  gap: 20px; /* Adiciona espaço entre os botões */
+  margin-top: 20px;
+}
+
+.button-group button {
+  flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+  max-width: 200px; /* Limita o tamanho dos botões */
+}
+
+button {
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:first-of-type {
+  background: #138803;
+  color: white;
+}
+
+button.finalizar {
+  background: #00cc00;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.button-group .voltar {
+  background: #068102;
+  color: white;
+}
+
+.button-group .proximo {
+  background: #02c702;
+  color: black;
+  transition: background 0.3s ease-in-out;
+}
+
+
+.proximo:hover {
+  background: #016e01;
+  color: black;
+}

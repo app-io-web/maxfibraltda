@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import getServicosAdicionais from '../../Services/planosService';
 import { FaWifi, FaTachometerAlt, FaHeadset, FaGamepad, FaCheckCircle } from 'react-icons/fa';
 import '../../Styles/Planos.css';
 import '../../Styles/PlanosAnimations.css'; // Importando o CSS de animação
+import Formulario from "../Formulario/Formulario"; // Importa o formulário
 
 function Gold() {
   const [servicos, setServicos] = useState([]);
   const [maisVendido, setMaisVendido] = useState(false);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+
+  const handleAssinar = () => {
+    navigate("/cadastro", { state: { plano: "Gold" } });
+  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServicos = async () => {
@@ -17,6 +25,8 @@ function Gold() {
   
     fetchServicos();
   }, []);
+
+
   
 
   return (
@@ -48,7 +58,9 @@ function Gold() {
 
       <p className="obs">Obs.: Cliente tem acesso exclusivo a apenas 1 dos Apps mencionados acima.</p>
 
-      <button className="assinar-btn">ASSINE AGORA</button>
+      <button className="assinar-btn" onClick={handleAssinar}>
+        ASSINE AGORA
+      </button>
     </div>
   );
 }

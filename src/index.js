@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter as Router, Routes, Route } from "react-router-dom"; // Usa HashRouter
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./Styles/index.css";
 import Home from "./Pages/Home";
-import LoadingScreen from "./Components/LoadingScreen"; // Certifique-se do caminho correto
+import LoadingScreen from "./Components/LoadingScreen";
+import Cadastro from "./Pages/Cadastro";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 5000); // Simula o tempo de carregamento
+    setTimeout(() => setLoading(false), 3000);
   }, []);
 
   return loading ? <LoadingScreen /> : <Home />;
@@ -21,6 +22,9 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        {/* Redireciona para home se a rota não existir */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   </React.StrictMode>

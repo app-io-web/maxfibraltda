@@ -12,7 +12,7 @@ function Header() {
       <nav>
         <ul>
           <li><a href="#">Início</a></li>
-          <li><a href="#">Cadastre-se</a></li>
+          <li><a href="/cadastro">Cadastre-se</a></li>
           <li><a href="#">Sobre Nós</a></li>
           <li><a href="#">Empresas</a></li>
           <li><a href="#">Trabalhe Conosco</a></li>

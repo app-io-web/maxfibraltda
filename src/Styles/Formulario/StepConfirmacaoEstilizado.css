@@ -1,0 +1,40 @@
+.cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colunas */
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .confirmacao-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-left: 5px solid transparent;
+  }
+  
+  .confirmacao-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .conteudo-card {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #444;
+  }
+  
+  .confirmacao-card.ativo {
+    background: #fff;
+    border-left: 5px solid #16B929;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  

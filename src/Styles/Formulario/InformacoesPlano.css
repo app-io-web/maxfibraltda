@@ -1,0 +1,48 @@
+.plano-container {
+    background: #1e1e2d;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: left;
+  }
+  
+  .plano-detalhes {
+    margin-top: 15px;
+  }
+  
+  .plano-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .plano-label {
+    font-weight: bold;
+    color: #ccc;
+  }
+  
+  .plano-valor {
+    color: #00d400;
+    font-weight: bold;
+}
+  
+.plano-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  background: #00aa00;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 82%;
+  align-items: center;
+}
+  
+  .TituloInforPlano{
+    color: white;
+  }

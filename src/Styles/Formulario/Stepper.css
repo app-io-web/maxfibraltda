@@ -1,0 +1,43 @@
+.stepper-container {
+  display: flex !important;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+.step-item.active {
+  color: #000000; /* Azul para o passo ativo */
+  font-weight: bold;
+}
+
+.step-icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: gray;
+  color: white;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.step-item.active .step-icon {
+  background: #161616; /* Fundo escuro para o ícone ativo */
+  color: rgb(46, 230, 0); /* Cor do ícone */
+  border: 1px solid rgb(40, 199, 0); /* Correção da borda */
+}
+
+
+.step-title {
+  margin-left: 8px;
+  font-size: 16px;
+}

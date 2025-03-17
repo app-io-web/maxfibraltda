@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.formulario-container input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #bbb; /* Define a cor da borda */
+  border-radius: 5px;
+  background: transparent; /* Remove fundo */
+  outline: none; /* Remove efeito azul ao clicar */
+  transition: border 0.3s ease-in-out;
+}
+
+.formulario-container input:focus {
+  border-color: #32CD32; /* Cor ao focar */
+}
+
+h2 {
+  color: #333;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f8f8f8;
+  margin-bottom: 6px;
+}
+
+
+input:focus, select:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 8px rgba(0, 170, 255, 0.5);
+  outline: none;
+}
+
+
+
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
