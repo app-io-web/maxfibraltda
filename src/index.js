@@ -10,23 +10,29 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
+    setTimeout(() => setLoading(false), 5000);
   }, []);
 
-  return loading ? <LoadingScreen /> : <Home />;
+  return (
+    <Router> {/* Agora, HashRouter será corretamente utilizado */}
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          {/* Redireciona para home se a rota não existir */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      )}
+    </Router>
+  );
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/cadastro" element={<Cadastro />} />
-        {/* Redireciona para home se a rota não existir */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
+    <App />
   </React.StrictMode>
 );
 

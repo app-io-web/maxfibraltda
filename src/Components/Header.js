@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import '../Styles/Header.css';
 import Button from './Button';
 import logo from '../Assets/logo.png'; // Substitua pelo caminho correto da logo
@@ -11,14 +12,14 @@ function Header() {
       </div>
       <nav>
         <ul>
-          <li><a href="#">Início</a></li>
-          <li><a href="/cadastro">Cadastre-se</a></li>
-          <li><a href="#">Sobre Nós</a></li>
-          <li><a href="#">Empresas</a></li>
-          <li><a href="#">Trabalhe Conosco</a></li>
+          <li><Link to="/">Início</Link></li>
+          <li><Link to="/cadastro">Cadastre-se</Link></li>
+          <li><a href="#sobre-nos">Sobre Nós</a></li>
+          <li><a href="#empresas">Empresas</a></li>
+          <li><a href="#trabalhe-conosco">Trabalhe Conosco</a></li>
         </ul>
       </nav>
-      <Button text="Acessar Central" href='https://ixc.maxfibraltda.com.br/central_assinante_web/login' />
+      <Button text="Acessar Central" href="https://ixc.maxfibraltda.com.br/" />
     </header>
   );
 }
