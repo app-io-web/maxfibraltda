@@ -6,7 +6,7 @@ import Localizacao from "./Localizacao";
 const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
   return (
     <div className="step-container">
-      <h2>Endereço</h2>
+      <h2 className="titulo-confirmacao" >Endereço</h2>
 
       <label>Cidade *</label>
       <input

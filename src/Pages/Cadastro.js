@@ -10,8 +10,8 @@ const Cadastro = () => {
   console.log("🚀 ~ Cadastro -> location.state", location.state); // Depuração para verificar os valores recebidos
 
   const [planoSelecionado, setPlanoSelecionado] = useState(location.state?.plano || "Gold");
-  const [streamingSelecionado, setStreamingSelecionado] = useState(location.state?.streaming || "");
-  const [vencimentoSelecionado, setVencimentoSelecionado] = useState(location.state?.vencimento || "");
+  const [streamingSelecionado, setStreamingSelecionado] = useState(location.state?.streaming || "Deezer");
+  const [vencimentoSelecionado, setVencimentoSelecionado] = useState(location.state?.vencimento || "05");
 
 
   return (

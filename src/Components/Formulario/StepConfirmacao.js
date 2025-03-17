@@ -65,7 +65,6 @@ const StepConfirmacao = ({ prevStep, formData }) => {
               <p><strong>Plano:</strong> {formData.plano}</p>
               <p><strong>Streaming Adicional:</strong> {formData.streaming || "Nenhum"}</p>
               <p><strong>Data de Vencimento:</strong> {formData.vencimento}</p>
-              <p><strong>Localização:</strong> Lat: {formData.latitude}, Lng: {formData.longitude}</p>
             </div>
           )}
         </div>

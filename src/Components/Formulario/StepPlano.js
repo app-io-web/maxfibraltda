@@ -23,21 +23,29 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
       alert("Selecione um plano antes de continuar!");
       return;
     }
-
-    // Enviar a Data de Vencimento no Navigate
-    navigate("/cadastro", {
-      state: {
-        plano: formData.plano,
-        streaming: formData.streaming,
-        vencimento: formData.vencimento, // Adicionamos o vencimento corretamente!
-      }
+  
+    if (!formData.vencimento) {
+      alert("Selecione uma data de vencimento!");
+      return;
+    }
+  
+    console.log("🚀 Enviando dados para Cadastro:", formData);
+  
+    // Atualiza os dados antes de avançar
+    updateFormData({ 
+      vencimento: formData.vencimento, 
+      streaming: formData.streaming 
     });
-    
+  
+    // **AVANÇA PARA O PRÓXIMO STEP**
+    nextStep();
   };
+  
+  
 
   return (
     <div className="step-container">
-      <h2>Plano Escolhido</h2>
+      <h2 className="titulo-confirmacao" >Plano Escolhido</h2>
 
       <label>Plano Selecionado:</label>
       <input type="text" value={formData.plano} readOnly />

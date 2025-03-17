@@ -3,7 +3,7 @@ import React from "react";
 const StepDadosPessoais = ({ nextStep, updateFormData, formData }) => {
   return (
     <div className="step-container">
-      <h2>Dados de Cadastro</h2>
+      <h2 className="titulo-confirmacao">Dados de Cadastro</h2>
       <label>Nome Completo *</label>
       <input type="text" value={formData.nome} onChange={(e) => updateFormData({ nome: e.target.value })} required />
 

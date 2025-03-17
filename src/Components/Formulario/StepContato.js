@@ -3,7 +3,7 @@ import React from "react";
 const StepContato = ({ nextStep, prevStep, updateFormData, formData }) => {
   return (
     <div className="step-container">
-      <h2>Contato</h2>
+      <h2 >Contato</h2>
       <label>Email *</label>
       <input type="email" value={formData.email} onChange={(e) => updateFormData({ email: e.target.value })} required />
 

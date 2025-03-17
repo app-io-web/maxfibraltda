@@ -18,33 +18,37 @@ button {
   border-radius: 8px;
 }
 
-button:first-of-type {
+.button-group button:first-of-type {
   background: #138803;
   color: white;
 }
 
+/* Botão Finalizar */
 button.finalizar {
   background: #00cc00;
   color: white;
 }
 
+/* Efeito hover para todos os botões */
 button:hover {
   opacity: 0.9;
 }
 
-.button-group .voltar {
+/* Botão Voltar dentro do grupo de botões */
+.button-group button.voltar {
   background: #068102;
   color: white;
 }
 
-.button-group .proximo {
+/* Botão Próximo dentro do grupo de botões */
+.button-group button.proximo {
   background: #02c702;
   color: black;
   transition: background 0.3s ease-in-out;
 }
 
-
-.proximo:hover {
+/* Efeito hover apenas para o botão Próximo dentro do grupo */
+.button-group button.proximo:hover {
   background: #016e01;
   color: black;
 }

@@ -23,7 +23,7 @@
   border-color: #32CD32; /* Cor ao focar */
 }
 
-h2 {
+.titulo-confirmacao h2 {
   color: #333;
   font-size: 22px;
   font-weight: bold;
