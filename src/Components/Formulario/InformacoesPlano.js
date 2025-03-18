@@ -44,7 +44,7 @@ const InformacoesPlano = ({ plano, streaming, vencimento }) => {
         </div>
         <div className="plano-item">
           <span className="plano-label">Velocidade:</span>
-          <span className="plano-valor">{velocidade}</span>
+          <span className="plano-valor">{velocidade || "Não selecionado"}</span>
         </div>
         <div className="plano-item">
           <span className="plano-label">Serviços:</span>
@@ -58,18 +58,18 @@ const InformacoesPlano = ({ plano, streaming, vencimento }) => {
         {streamingAtual && streamingAtual !== "" && (
           <div className="plano-item">
             <span className="plano-label">Streaming Adicional:</span>
-            <span className="plano-valor">{streamingAtual}</span>
+            <span className="plano-valor">{streamingAtual || "Não selecionado"}</span>
           </div>
         )}
 
         <div className="plano-item">
           <span className="plano-label">Data de Vencimento:</span>
-          <span className="plano-valor">{vencimentoAtual}</span>
+          <span className="plano-valor">{vencimentoAtual || "Não informado"}</span>
         </div>
 
         <div className="plano-total">
           <span>Total:</span>
-          <span className="preco">{preco}</span>
+          <span class="precoCadastro">{preco}</span>
         </div>
       </div>
     </div>

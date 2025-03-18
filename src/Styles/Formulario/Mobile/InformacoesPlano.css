@@ -1,0 +1,80 @@
+/* 📌 Estilo Base */
+.plano-container-mobile {
+  background: #1e1e2d;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+
+.titulo-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.TituloInforPlano{
+  font-size: 16px;
+}
+
+.icone-seta {
+  font-size: 18px;
+  color: rgb(17, 209, 0);
+}
+
+/* 📌 Quando o card estiver expandido */
+.plano-container.expandido {
+  height: auto;
+  max-height: 600px;
+}
+
+.plano-detalhes-mobile {
+  margin-top: 10px;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 📌 Modo Fechado */
+.plano-container-mobile:not(.expandido) .plano-detalhes-mobile {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+
+/* 📌 Mobile */
+@media screen and (max-width: 768px) {
+  .plano-container {
+    width: 90%;
+    padding: 15px;
+  }
+}
+
+/* 📌 Bolinha piscante */
+.notificacao {
+  width: 10px;
+  height: 10px;
+  background-color: #00ff00;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
+  animation: pulse 1s infinite alternate;
+}
+
+/* 📌 Animação da bolinha */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1.3);
+  }
+}

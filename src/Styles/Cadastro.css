@@ -14,6 +14,14 @@
   border-radius: 30px;
 }
 
+.precoCadastro {
+  font-size: 20px;
+  font-weight: bold;
+  /* margin-top: 10px; */
+  color: #333;
+}
+
+
 .plano-container {
   width: 400px;
   background: #151515;
@@ -35,3 +43,117 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   height: 100%;
 }
+
+
+@media (max-width: 768px) {
+  .cadastro-container {
+    display: none; /* Esconde a versão desktop no mobile */
+  }
+  .cadastro-container-mobile {
+    display: flex; /* Exibe apenas a versão mobile */
+  }
+}
+
+
+/* 🌍 Mobile */
+@media (max-width: 768px) {
+  .cadastro-container {
+    display: none; /* Esconde versão Desktop no Mobile */
+  }
+
+  .cadastro-container-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%;
+    padding: 15px;
+    height: 100%;
+  }
+  
+  .cadastro-mobile-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Ajusta para exibir InformacoesPlanoMobile acima */
+    gap: 15px;
+  }
+
+  .plano-container {
+    width: 100%;
+    max-width: 100%;
+    height: 90%  !important;
+  }
+
+  .plano-container {
+    width: 400px;
+    background: #151515;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 84%;
+  }
+.plano-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    background: #00aa00;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 4%;
+    align-items: center;
+}
+
+.plano-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  font-size: 15px;
+}
+.preco {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 2px;
+  color: #333;
+}
+.precoB {
+  font-size: 17px;
+  font-weight: bold;
+  /* margin-top: 2px; */
+  color: #ffffff;
+}
+.step-title {
+  margin-left: 4px;
+  font-size: 15px;
+  margin-right: 4px;
+}
+
+/* Forçar estilo para input de data no iOS */
+input[type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  text-transform: uppercase; /* Ajuste opcional para melhorar legibilidade */
+}
+
+/* Garante que o iOS renderize corretamente */
+@supports (-webkit-touch-callout: none) {
+  input[type="date"] {
+    font-size: 16px !important;
+    height: auto;
+    line-height: normal;
+  }
+}
+
+}
+
+
