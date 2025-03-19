@@ -1,0 +1,33 @@
+.plano-selecionado-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f6f6f6;
+  }
+  
+  .alterar-button {
+    color: #00aa00;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .plano-edit-select {
+    width: 100%;
+    border: none;
+    background: #ffffff00;
+    border: solid 1px green !important;
+}
+
+.precoD-planoD-containeMobile{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    flex-direction: row-reverse;
+}

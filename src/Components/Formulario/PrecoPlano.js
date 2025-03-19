@@ -10,7 +10,7 @@ const precosPlanos = {
 const PrecoPlano = ({ plano }) => {
   return (
     <div className="preco-plano-container">
-      <label>Valor:</label>
+      <label>Valor: </label>
       <input type="text" value={precosPlanos[plano] || "Não disponível"} readOnly />
     </div>
   );
