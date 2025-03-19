@@ -1,0 +1,35 @@
+@media screen and (max-width: 768px) {
+.accordion {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: #f9f9f9;
+  }
+  
+  .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+    background: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  .accordion-header h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .accordion-content {
+    padding: 12px;
+    background: white;
+    border-top: 1px solid #ddd;
+  }
+  
+  .accordion-header svg {
+    font-size: 18px;
+    color: #00aa00; /* Ícone verde */
+  }
+}

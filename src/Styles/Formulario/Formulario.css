@@ -82,6 +82,19 @@ input:focus, select:focus {
   width: 100%;
 }
 
+.input-invalido {
+  border: 1px solid red !important;
+  background-color: #ffe6e6;
+}
+
+.erro-cpf {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+
 /* Reduzindo tamanho para mobile */
 /* MOBILE */
 @media screen and (max-width: 768px) {

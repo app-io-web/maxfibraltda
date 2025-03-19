@@ -11,7 +11,7 @@ const PrecoPlanoMobile = ({ plano }) => {
 
   return (
     <div className="plano-preco">
-      <span>Total:</span>
+      <span>Total: </span>
       <span className="preco">{preco}</span>
     </div>
   );

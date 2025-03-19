@@ -1,8 +1,8 @@
-/* Corrigir o estilo do select no iOS */
-select,
-input[type="date"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+
+
+
+@media screen and (max-width: 768px) {
+select,input[type="date"] {
   appearance: none;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -10,6 +10,39 @@ input[type="date"] {
   padding: 10px;
   font-size: 16px;
   width: 100%;
+  min-height: 1.2em;
+}
+
+input[type='date']{
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  display:-webkit-flex !important;
+}
+
+/* Simula o placeholder quando o campo está vazio */
+input[type="date"].placeholder-active::before {
+  content: "DD/MM/AAAA";
+  color: #a0a0a0;
+  left: 10px;
+}
+
+/* Remove o placeholder fake quando o usuário digita */
+input[type="date"].has-value::before {
+  content: "";
+}
+
+
+.data-nascimento-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.alternar-modo {
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* Adicionar um ícone de seta no select manualmente */
@@ -19,4 +52,20 @@ select {
   background-position: right 10px center;
   background-size: 20px;
   padding-right: 30px; /* Para evitar sobreposição com a seta */
+}
+
+.input-invalido {
+  border: 1px solid red !important;
+  background-color: #ffe6e6;
+}
+
+.erro-cpf {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+
+
 }

@@ -1,0 +1,57 @@
+.plano-selecionado-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .plano-selecionado-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f6f6f6;
+  }
+  
+  .plano-text {
+  }
+  
+  .plano-edit-select {
+    width: 100%;
+    border: none;
+    background: #ffffff00;
+    border: solid 1px green;
+}
+  
+  .alterar-button {
+    color: #00aa00;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+
+  /* Wrapper para o preço do plano */
+  .precoM-planoM-containeMobile {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    flex-direction: row-reverse;
+}
+  
+
+  
+
+  
+/* 🔥 Ajuste para telas menores (Mobile) */
+@media screen and (max-width: 768px) {
+  .plano-preco {
+    color: #00aa00; /* Verde para destacar */
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 5px;
+  }
+}

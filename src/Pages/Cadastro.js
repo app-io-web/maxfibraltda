@@ -29,44 +29,46 @@ const Cadastro = () => {
   }, []);
 
   return (
-    
-    <div className={isMobile ? "cadastro-container-mobile" : "cadastro-container"}>
-
-      {/* Versão Desktop */}
-      {!isMobile && (
-        <>
-          <InformacoesPlano 
-            plano={planoSelecionado} 
-            streaming={streamingSelecionado} 
-            vencimento={vencimentoSelecionado} 
-          />
-          <Formulario
-            setPlanoSelecionado={setPlanoSelecionado} 
-            setStreamingSelecionado={setStreamingSelecionado} 
-            setVencimentoSelecionado={setVencimentoSelecionado}
-          />
-        </>
-      )}
-
-
-      {/* Versão Mobile */}
-      
-      {isMobile && (
-        <div className="cadastro-mobile-wrapper">
-          <InformacoesPlanoMobile 
-            plano={planoSelecionado} 
-            streaming={streamingSelecionado} 
-            vencimento={vencimentoSelecionado} 
-          />
-          <FormularioMobile
-            setPlanoSelecionado={setPlanoSelecionado} 
-            setStreamingSelecionado={setStreamingSelecionado} 
-            setVencimentoSelecionado={setVencimentoSelecionado}
-          />
-        </div>
-      )}
-    </div>
+    <>
+      {/* Adicionando Header Desktop e Mobile */}
+      {!isMobile ? <Header /> : <MobileHeader />}
+  
+      <div className={isMobile ? "cadastro-container-mobile" : "cadastro-container"}>
+        {/* Versão Desktop */}
+        {!isMobile && (
+          <>
+            <InformacoesPlano 
+              plano={planoSelecionado} 
+              streaming={streamingSelecionado} 
+              vencimento={vencimentoSelecionado} 
+            />
+            <Formulario
+              setPlanoSelecionado={setPlanoSelecionado} 
+              setStreamingSelecionado={setStreamingSelecionado} 
+              setVencimentoSelecionado={setVencimentoSelecionado}
+            />
+          </>
+        )}
+  
+        {/* Versão Mobile */}
+        {isMobile && (
+          <div className="cadastro-mobile-wrapper">
+            <InformacoesPlanoMobile 
+              plano={planoSelecionado} 
+              streaming={streamingSelecionado} 
+              vencimento={vencimentoSelecionado} 
+            />
+            <FormularioMobile
+              setPlanoSelecionado={setPlanoSelecionado} 
+              setStreamingSelecionado={setStreamingSelecionado} 
+              setVencimentoSelecionado={setVencimentoSelecionado}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
+  
 };
 
 export default Cadastro;
