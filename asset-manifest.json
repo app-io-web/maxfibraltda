@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.db836b7e.css",
-    "main.js": "/static/js/main.56dd5b70.js",
+    "main.css": "/static/css/main.d2ba2fc8.css",
+    "main.js": "/static/js/main.91419077.js",
     "static/media/MOCKUP-2---PLAYSTORE.png": "/static/media/MOCKUP-2---PLAYSTORE.6a867efa490e3866899c.png",
     "static/media/MOCKUP-2---APPLESTORE.png": "/static/media/MOCKUP-2---APPLESTORE.319bb0ffed9f5c0766c4.png",
     "static/media/MOCKUP.png": "/static/media/MOCKUP.7b23333a9f091b3cdc7b.png",
@@ -18,11 +18,11 @@
     "static/media/logo.png": "/static/media/logo.cd6b355b7fa63bc309dc.png",
     "static/media/logo-text.svg": "/static/media/logo-text.1edfa63a11f4276a21789e39d8b58bfe.svg",
     "index.html": "/index.html",
-    "main.db836b7e.css.map": "/static/css/main.db836b7e.css.map",
-    "main.56dd5b70.js.map": "/static/js/main.56dd5b70.js.map"
+    "main.d2ba2fc8.css.map": "/static/css/main.d2ba2fc8.css.map",
+    "main.91419077.js.map": "/static/js/main.91419077.js.map"
   },
   "entrypoints": [
-    "static/css/main.db836b7e.css",
-    "static/js/main.56dd5b70.js"
+    "static/css/main.d2ba2fc8.css",
+    "static/js/main.91419077.js"
   ]
 }
