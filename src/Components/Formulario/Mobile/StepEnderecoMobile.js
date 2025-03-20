@@ -18,12 +18,11 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
     }
   }, []);
 
+  // Função para atualizar o CEP e o bairro quando o usuário escolhe um CEP do dropdown
   const handleCepChange = (e) => {
     const cepSelecionado = e.target.value;
-  
-    // 🔥 Encontra o objeto do CEP selecionado na lista de CEPs disponíveis
+
     const cepData = cepsDisponiveis.find((cep) => cep.cep === cepSelecionado);
-  
     if (cepData) {
       updateFormData({
         cep: cepData.cep,
@@ -31,7 +30,6 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
       });
     }
   };
-  
 
   useEffect(() => {
     const autocompleteInstance = GooglePlacesService.carregarGoogleAutocomplete(
@@ -41,12 +39,18 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
           instance,
           (novoEndereco) => {
             updateFormData(novoEndereco); // 🔥 Atualiza todos os campos
+            setCepsDisponiveis([]); // 🔥 Limpa a lista de CEPs antes de buscar novos
           },
           (uf, cidade, rua) => {
             return ViaCEPService.buscarCepPorEndereco(uf, cidade, rua)
               .then((ceps) => {
                 console.log("CEPs encontrados:", ceps);
                 setCepsDisponiveis(ceps);
+
+                // 🔥 Se houver apenas um CEP, atualiza automaticamente
+                if (ceps.length === 1) {
+                  updateFormData({ cep: ceps[0].cep, bairro: ceps[0].bairro });
+                }
               })
               .catch((error) => console.error("Erro ao definir CEPs:", error));
           }
@@ -55,10 +59,10 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
     );
   }, []);
 
-  // 🔥 Sempre que a lista de CEPs mudar, preenche automaticamente se houver apenas um
+  // 🔥 Sempre que a lista de CEPs mudar, verifica se só há um e preenche automaticamente
   useEffect(() => {
     if (cepsDisponiveis.length === 1) {
-      updateFormData({ cep: cepsDisponiveis[0].cep });
+      updateFormData({ cep: cepsDisponiveis[0].cep, bairro: cepsDisponiveis[0].bairro });
     }
   }, [cepsDisponiveis]);
 
@@ -115,17 +119,16 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
         <div className="cep-sugestoes">
           <label>Selecione um CEP disponível:</label>
           <select 
-              value={formData.cep || ""}
-              onChange={handleCepChange} // 🔥 Agora o bairro será atualizado junto com o CEP
-            >
-              <option value="">Escolha um CEP</option>
-              {cepsDisponiveis.map((cepData, index) => (
-                <option key={index} value={cepData.cep}>
-                  {cepData.cep} - {cepData.logradouro}, {cepData.bairro}
-                </option>
-              ))}
-            </select>
-
+            value={formData.cep || ""}
+            onChange={handleCepChange} // 🔥 Atualiza bairro junto com o CEP
+          >
+            <option value="">Escolha um CEP</option>
+            {cepsDisponiveis.map((cepData, index) => (
+              <option key={index} value={cepData.cep}>
+                {cepData.cep} - {cepData.logradouro}, {cepData.bairro}
+              </option>
+            ))}
+          </select>
         </div>
       )}
 
