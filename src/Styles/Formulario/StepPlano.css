@@ -22,12 +22,3 @@
     border: solid 1px green !important;
 }
 
-.precoD-planoD-containeMobile{
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    margin-top: 10px;
-    font-size: 16px;
-    color: #333;
-    flex-direction: row-reverse;
-}

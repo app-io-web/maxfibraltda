@@ -53,6 +53,8 @@ const StepConfirmacao = ({ prevStep, formData }) => {
               <p><strong>Nª:</strong> {formData.numero}</p>
               <p><strong>Rua:</strong> {formData.rua}</p>
               <p><strong>Complemento:</strong> {formData.complemento || "Não informado"}</p>
+              <p><strong>Longitude:</strong> {formData.longitude || "Não informado"}</p>
+              <p><strong>Latitude:</strong> {formData.latitude || "Não informado"}</p>
             </div>
           )}
         </div>

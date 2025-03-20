@@ -11,8 +11,6 @@ import "../Styles/Cadastro.css";
 const Cadastro = () => {
   const location = useLocation();
 
-  console.log("🚀 ~ Cadastro -> location.state", location.state);
-
   const [planoSelecionado, setPlanoSelecionado] = useState(location.state?.plano || "Gold");
   const [streamingSelecionado, setStreamingSelecionado] = useState(location.state?.streaming || "");
   const [vencimentoSelecionado, setVencimentoSelecionado] = useState(location.state?.vencimento || "");

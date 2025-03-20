@@ -103,7 +103,13 @@ const StepDadosPessoais = ({ nextStep, updateFormData, formData, isMobile }) => 
       </div>
 
       <div className="button-group">
-        <button className="proximo" onClick={nextStep}>Próximo</button>
+      <button
+          className={`botao-proximo ${cpfValido ? "botao-habilitado" : "botao-desabilitado"}`}
+          onClick={nextStep}
+          disabled={!cpfValido}
+        >
+          Próximo
+        </button>
       </div>
     </div>
   );

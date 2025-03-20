@@ -1,5 +1,3 @@
-@media (max-width: 768px) {
-
 /* 🔥 Botão para adicionar telefone extra */
 .btn-adicionar {
     background: none;
@@ -33,8 +31,3 @@
     cursor: not-allowed;
   }
   
-
-
-
-
-}

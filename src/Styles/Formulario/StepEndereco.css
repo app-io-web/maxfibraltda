@@ -16,3 +16,16 @@
     border-radius: 5px;
   }
   
+
+  #autocomplete {
+    pointer-events: auto !important;
+    cursor: text !important;
+  }
+  
+
+  .cep-sugestoes select {
+    background: transparent; /* 🔥 Remove o fundo */
+    border: 1px solid #ccc; /* Opcional: Mantém a borda visível */
+    color: #000; /* Mantém o texto visível */
+    outline: none; /* Remove o contorno azul ao clicar */
+}

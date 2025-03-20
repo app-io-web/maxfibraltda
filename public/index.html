@@ -47,12 +47,38 @@
     <noscript>⚠️ Você precisa habilitar o JavaScript para rodar este site corretamente.</noscript>
     <div id="root"></div>
   </body>
+      <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARQNVrPOVWN2Gf14l8qemF9xPstYiRwVw&libraries=places"
+      async
+      defer
+      onload="initAutocomplete()">
+    </script>
+
+    <script>
+      function initAutocomplete() {
+        if (window.google && window.google.maps && window.google.maps.places) {
+          const input = document.getElementById("autocomplete");
+          if (!input) return;
+
+          const options = { types: ["geocode"], componentRestrictions: { country: "BR" } };
+          const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+          autocomplete.addListener("place_changed", function () {
+            window.dispatchEvent(new CustomEvent("place_changed", { detail: autocomplete.getPlace() }));
+          });
+        }
+      }
+    </script>
+
+
 
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js");
     }
   </script>
+
+
 
   
 </html>
