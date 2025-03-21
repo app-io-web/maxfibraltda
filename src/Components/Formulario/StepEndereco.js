@@ -3,6 +3,7 @@ import "../../Styles/Formulario/StepEndereco.css";
 import SolicitarLocalizacaoModal from "./SolicitarLocalizacaoModal";
 import GooglePlacesService from "../../Services/GooglePlacesService";
 import ViaCEPService from "../../Services/ViaCEPService";
+import Localizacao from "./Localizacao";
 
 const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
   const [showModal, setShowModal] = useState(false);
