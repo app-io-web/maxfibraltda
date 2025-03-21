@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrecoPlano from "./PrecoPlano";
 import StreamingService from "../../Services/StreamingService";
-import VendedorService from "../../Services/VendedorService"; // Importa o service dos vendedores
+import VendedorService from "../../Services/VendedorService";
 import "../../Styles/Formulario/StepPlano.css";
 
 const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
   const navigate = useNavigate();
   const [streamingOptions, setStreamingOptions] = useState([]);
-  const [vendedores, setVendedores] = useState([]); // ✅ Estado para vendedores
+  const [vendedores, setVendedores] = useState([]); // ✅ Estado para armazenar vendedores
   const [isEditingPlano, setIsEditingPlano] = useState(false);
   const [selectedPlano, setSelectedPlano] = useState(formData.plano);
 
   useEffect(() => {
-    // 🔥 Busca os serviços de streaming com base no plano escolhido
     const fetchStreamingOptions = async () => {
       if (formData.plano) {
         const services = await StreamingService.getStreamingByPlano(formData.plano);
@@ -21,14 +20,13 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
       }
     };
 
-    // 🔥 Busca a lista de vendedores da API
     const fetchVendedores = async () => {
       const vendedoresList = await VendedorService.getVendedores();
       setVendedores(vendedoresList);
     };
 
     fetchStreamingOptions();
-    fetchVendedores(); // ✅ Busca os vendedores na montagem do componente
+    fetchVendedores();
   }, [formData.plano]);
 
   const handleNext = () => {
@@ -49,13 +47,6 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
 
     console.log("🚀 Enviando dados para Cadastro:", formData);
 
-    // Atualiza os dados antes de avançar
-    updateFormData({
-      vencimento: formData.vencimento,
-      streaming: formData.streaming,
-      vendedor: formData.vendedor,
-    });
-
     nextStep();
   };
 
@@ -66,6 +57,17 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
   const handleSavePlano = () => {
     updateFormData({ plano: selectedPlano });
     setIsEditingPlano(false);
+  };
+
+  // ✅ Função para atualizar nome e e-mail do vendedor no formData
+  const handleVendedorChange = (event) => {
+    const nomeVendedor = event.target.value;
+    const vendedorSelecionado = vendedores.find((v) => v.nome === nomeVendedor);
+
+    updateFormData({
+      vendedor: vendedorSelecionado.nome,
+      vendedorEmail: vendedorSelecionado.email, // ✅ Armazena o e-mail para enviar ao backend
+    });
   };
 
   return (
@@ -117,14 +119,11 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
 
       {/* ✅ Novo Select de Vendedor */}
       <label>Selecione um Vendedor:</label>
-      <select
-        value={formData.vendedor || ""}
-        onChange={(e) => updateFormData({ vendedor: e.target.value })}
-      >
+      <select value={formData.vendedor || ""} onChange={handleVendedorChange}>
         <option value="">Escolha um vendedor</option>
         {vendedores.map((vendedor, index) => (
-          <option key={index} value={vendedor}>
-            {vendedor}
+          <option key={index} value={vendedor.nome}>
+            {vendedor.nome}
           </option>
         ))}
       </select>

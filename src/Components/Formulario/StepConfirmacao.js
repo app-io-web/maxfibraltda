@@ -17,6 +17,13 @@ const StepConfirmacao = ({ prevStep, formData }) => {
   const handleSubmit = async () => {
     setLoading(true);
 
+    // 🚀 Garante que o email do vendedor também seja enviado
+    if (!formData.vendedor || !formData.vendedorEmail) {
+      alert("Erro: O vendedor e o e-mail do vendedor são obrigatórios!");
+      setLoading(false);
+      return;
+    }
+
     // 🚀 Corrige e garante que os campos essenciais estão preenchidos corretamente
     const dadosCorrigidos = {
       ...formData,
@@ -26,6 +33,7 @@ const StepConfirmacao = ({ prevStep, formData }) => {
       telefone3: formData.telefone3?.trim() || "", // Garante que telefone3 seja enviado, mesmo se vazio
       latitude: formData.latitude ? String(formData.latitude) : "", // Converte para string se existir
       longitude: formData.longitude ? String(formData.longitude) : "", // Converte para string se existir
+      vendedorEmail: formData.vendedorEmail, // ✅ Inclui o e-mail do vendedor
     };
 
     // 🔍 Remove espaços extras dos campos string
@@ -39,7 +47,7 @@ const StepConfirmacao = ({ prevStep, formData }) => {
     console.log("📤 Dados corrigidos enviados:", JSON.stringify(dadosCorrigidos, null, 2));
 
     // 🚨 Verificação de campos obrigatórios
-    const camposObrigatorios = ["nome", "cpf", "telefone1", "email", "cidade", "bairro", "rua", "cep", "numero"];
+    const camposObrigatorios = ["nome", "cpf", "telefone1", "email", "cidade", "bairro", "rua", "cep", "numero", "vendedor", "vendedorEmail"];
     const camposFaltando = camposObrigatorios.filter((campo) => !dadosCorrigidos[campo]);
 
     if (camposFaltando.length > 0) {
@@ -60,7 +68,7 @@ const StepConfirmacao = ({ prevStep, formData }) => {
     } finally {
       setLoading(false);
     }
-};
+  };
 
 
 

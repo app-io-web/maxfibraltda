@@ -10,7 +10,7 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
   const navigate = useNavigate();
   const [streamingOptions, setStreamingOptions] = useState([]);
   const [isEditingPlano, setIsEditingPlano] = useState(false);
-    const [vendedores, setVendedores] = useState([]); // ✅ Estado para vendedores
+  const [vendedores, setVendedores] = useState([]); // ✅ Estado para vendedores
   const [selectedPlano, setSelectedPlano] = useState(formData.plano);
 
   useEffect(() => {
@@ -20,17 +20,15 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
         setStreamingOptions(services);
       }
     };
-    fetchStreamingOptions();
-    fetchVendedores(); // ✅ Busca os vendedores na montagem do componente
-  }, [formData.plano]);
 
-
-      // 🔥 Busca a lista de vendedores da API
-  const fetchVendedores = async () => {
+    const fetchVendedores = async () => {
       const vendedoresList = await VendedorService.getVendedores();
       setVendedores(vendedoresList);
     };
 
+    fetchStreamingOptions();
+    fetchVendedores(); // ✅ Busca os vendedores na montagem do componente
+  }, [formData.plano]);
 
   const handleNext = () => {
     if (!formData.plano) {
@@ -43,11 +41,17 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
       return;
     }
 
+    if (!formData.vendedor) {
+      alert("Selecione um vendedor!");
+      return;
+    }
+
     console.log("🚀 Enviando dados para Cadastro:", formData);
 
     updateFormData({
       vencimento: formData.vencimento,
       streaming: formData.streaming,
+      vendedor: formData.vendedor,
     });
 
     nextStep();
@@ -60,6 +64,19 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
   const handleSavePlano = () => {
     updateFormData({ plano: selectedPlano });
     setIsEditingPlano(false);
+  };
+
+  // ✅ Função para atualizar nome e e-mail do vendedor no formData
+  const handleVendedorChange = (event) => {
+    const nomeVendedor = event.target.value;
+    const vendedorSelecionado = vendedores.find((v) => v.nome === nomeVendedor);
+
+    if (vendedorSelecionado) {
+      updateFormData({
+        vendedor: vendedorSelecionado.nome,
+        vendedorEmail: vendedorSelecionado.email, // ✅ Armazena o e-mail para envio ao backend
+      });
+    }
   };
 
   return (
@@ -89,7 +106,6 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
         <PrecoPlanoMobile plano={formData.plano} />
       </div>
 
-
       <label>Streaming Adicional:</label>
       <select value={formData.streaming} onChange={(e) => updateFormData({ streaming: e.target.value })}>
         <option value="">Nenhum</option>
@@ -108,16 +124,13 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
         <option value="20">Dia 20</option>
       </select>
 
-            {/* ✅ Novo Select de Vendedor */}
+      {/* ✅ Novo Select de Vendedor */}
       <label>Selecione um Vendedor:</label>
-      <select
-        value={formData.vendedor || ""}
-        onChange={(e) => updateFormData({ vendedor: e.target.value })}
-      >
+      <select value={formData.vendedor || ""} onChange={handleVendedorChange}>
         <option value="">Escolha um vendedor</option>
         {vendedores.map((vendedor, index) => (
-          <option key={index} value={vendedor}>
-            {vendedor}
+          <option key={index} value={vendedor.nome}>
+            {vendedor.nome}
           </option>
         ))}
       </select>

@@ -26,6 +26,7 @@ const FormularioService = {
         plano: formData.plano,
         streaming: formData.streaming || "Nenhum",
         vencimento: formData.vencimento,
+        vendedorEmail: formData.vendedorEmail || "Não informado",
       };
 
       // 🔍 Log dos dados antes do envio

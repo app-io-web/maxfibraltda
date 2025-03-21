@@ -12,7 +12,7 @@ const VendedorService = {
           "Content-Type": "application/json",
         },
         params: {
-          fields: "Vendedor", // ✅ Apenas o campo Vendedor
+          fields: "Vendedor",
           limit: 100,
         },
       });
@@ -31,7 +31,7 @@ const VendedorService = {
         return [];
       }
 
-      // ✅ Extrai os nomes dos vendedores do objeto
+      // ✅ Converte para array de objetos [{ nome: "Joao", email: "joao@email.com" }, ...]
       const vendedores = Object.values(primeiroRegistro.Vendedor);
 
       console.log("✅ Vendedores encontrados:", vendedores);
