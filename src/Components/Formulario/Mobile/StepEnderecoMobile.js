@@ -132,6 +132,8 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
         </div>
       )}
 
+<div className="input-duplo">
+      <div>
       <label>Bairro *</label>
       <input
         type="text"
@@ -139,14 +141,27 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
         onChange={(e) => updateFormData({ bairro: e.target.value })}
         required
       />
+      </div>
 
-      <div className="input-duplo">
         <div>
           <label>CEP *</label>
           <input
             type="text"
             value={formData.cep || ""}
             onChange={(e) => updateFormData({ cep: e.target.value })}
+            required
+          />
+        </div>
+
+</div>
+
+      <div className="input-duplo">
+        <div>
+        <label>Número *</label>
+          <input
+            type="text"
+            value={formData.numero || ""}
+            onChange={(e) => updateFormData({ numero: e.target.value })}
             required
           />
         </div>
@@ -160,27 +175,13 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
           />
         </div>
       </div>
-
-      <div className="input-duplo">
-        <div>
-          <label>Número *</label>
-          <input
-            type="text"
-            value={formData.numero || ""}
-            onChange={(e) => updateFormData({ numero: e.target.value })}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Complemento</label>
+          <label>Ponto de Referencia</label>
           <input
             type="text"
             value={formData.complemento || ""}
             onChange={(e) => updateFormData({ complemento: e.target.value })}
           />
-        </div>
-      </div>
+
 
       {/* 🔥 Campos ocultos para armazenar Latitude e Longitude */}
       <input type="hidden" value={formData.latitude || ""} />

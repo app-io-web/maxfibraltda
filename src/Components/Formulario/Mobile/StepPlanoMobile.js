@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import PrecoPlanoMobile from "./PrecoPlanoMobile";
 import "../../../Styles/Formulario/Mobile/StepPlanoMobile.css";
 import StreamingService from "../../../Services/StreamingService";
+import VendedorService from "../../../Services/VendedorService"; // Importa o service dos vendedores
 
 const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
   const navigate = useNavigate();
   const [streamingOptions, setStreamingOptions] = useState([]);
   const [isEditingPlano, setIsEditingPlano] = useState(false);
+    const [vendedores, setVendedores] = useState([]); // ✅ Estado para vendedores
   const [selectedPlano, setSelectedPlano] = useState(formData.plano);
 
   useEffect(() => {
@@ -19,7 +21,16 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
       }
     };
     fetchStreamingOptions();
+    fetchVendedores(); // ✅ Busca os vendedores na montagem do componente
   }, [formData.plano]);
+
+
+      // 🔥 Busca a lista de vendedores da API
+  const fetchVendedores = async () => {
+      const vendedoresList = await VendedorService.getVendedores();
+      setVendedores(vendedoresList);
+    };
+
 
   const handleNext = () => {
     if (!formData.plano) {
@@ -95,6 +106,20 @@ const StepPlanoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
         <option value="05">Dia 05</option>
         <option value="10">Dia 10</option>
         <option value="20">Dia 20</option>
+      </select>
+
+            {/* ✅ Novo Select de Vendedor */}
+      <label>Selecione um Vendedor:</label>
+      <select
+        value={formData.vendedor || ""}
+        onChange={(e) => updateFormData({ vendedor: e.target.value })}
+      >
+        <option value="">Escolha um vendedor</option>
+        {vendedores.map((vendedor, index) => (
+          <option key={index} value={vendedor}>
+            {vendedor}
+          </option>
+        ))}
       </select>
 
       <div className="button-group-mobile">

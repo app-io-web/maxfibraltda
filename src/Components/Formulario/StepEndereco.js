@@ -145,14 +145,10 @@ const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
         </div>
 
         <div className="campo">
-          <label>Complemento</label>
+          <label>Ponto de Referência: </label>
           <input type="text" value={formData.complemento} onChange={(e) => updateFormData({ complemento: e.target.value })} />
         </div>
       </div>
-
-      <label>Ponto de Referência</label>
-      <input type="text" value={formData.pontoReferencia} onChange={(e) => updateFormData({ pontoReferencia: e.target.value })} />
-
       <div className="button-group">
         <button className="voltar" onClick={prevStep}>Voltar</button>
         <button className="proximo" onClick={nextStep}>Próximo</button>
