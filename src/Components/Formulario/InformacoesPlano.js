@@ -57,7 +57,7 @@ const InformacoesPlano = ({ plano, streaming, vencimento }) => {
 
         {streamingAtual && streamingAtual !== "" && (
           <div className="plano-item">
-            <span className="plano-label">Streaming Adicional:</span>
+            <span className="plano-label">Serviço Adicional:</span>
             <span className="plano-valor">{streamingAtual || "Não selecionado"}</span>
           </div>
         )}

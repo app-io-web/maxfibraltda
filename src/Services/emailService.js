@@ -11,7 +11,7 @@ export const enviarEmailAtendimento = async (nome, cpf, telefone, email, departa
             mensagem
         });
 
-        console.log("Resposta da API de e-mail:", response.data); // <-- Adicionado log para debug
+        //console.log("Resposta da API de e-mail:", response.data); // <-- Adicionado log para debug
         return response.data;
     } catch (error) {
         console.error("Erro ao enviar e-mail:", error.response ? error.response.data : error.message);

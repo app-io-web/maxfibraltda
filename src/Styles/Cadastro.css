@@ -1,3 +1,4 @@
+
 .cadastro-container {
   display: flex;
   justify-content: space-around;
@@ -5,13 +6,15 @@
   gap: 50px;
   max-width: 1200px;
   margin: auto;
-  margin-top: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
   height: 90vh;
-  background-color: #afafaf;
+  background-color: #e7e7e7;
   align-content: space-around;
   flex-wrap: wrap;
   flex-direction: column-reverse;
   border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .precoCadastro {
@@ -43,6 +46,13 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   height: 100%;
 }
+
+
+
+
+
+
+
 
 
 @media (max-width: 768px) {

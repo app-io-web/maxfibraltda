@@ -5,6 +5,24 @@ import "../../Styles/Formulario/Formulario.css";
 const StepDadosPessoais = ({ nextStep, updateFormData, formData, isMobile }) => {
 
   const [cpfValido, setCpfValido] = useState(true); // Estado para validação do CPF
+  const [formCompleto, setFormCompleto] = useState(false);
+  const [rgValido, setRgValido] = useState(true);
+
+
+
+  // Verifica se todos os campos estão preenchidos
+  useEffect(() => {
+    const camposPreenchidos =
+      formData.nome?.trim() &&
+      formData.cpf?.trim() &&
+      formData.rg?.trim() &&
+      formData.dataNascimento?.trim();
+
+    setFormCompleto(Boolean(camposPreenchidos && cpfValido));
+  }, [formData, cpfValido]);
+
+
+
 
   // 🔥 Função para formatar o CPF automaticamente
   const formatarCPF = (valor) => {
@@ -16,6 +34,44 @@ const StepDadosPessoais = ({ nextStep, updateFormData, formData, isMobile }) => 
     if (cpf.length <= 9) return `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6)}`;
     return `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)}`;
   };
+
+  const validarRG = (rg) => {
+    if (!rg) return false;
+  
+    // Remove tudo que não for número ou 'X'
+    const rgLimpo = rg.replace(/[^\dXx]/g, "").toUpperCase();
+  
+    // Tem que ter 9 dígitos
+    if (rgLimpo.length !== 9) return false;
+  
+    const corpo = rgLimpo.slice(0, 8);
+    const digito = rgLimpo.slice(8);
+  
+    let soma = 0;
+    let peso = 2;
+  
+    for (let i = 7; i >= 0; i--) {
+      soma += parseInt(corpo[i]) * peso;
+      peso++;
+    }
+  
+    let resto = soma % 11;
+    let dvCalculado;
+  
+    if (resto === 10) {
+      dvCalculado = 'X';
+    } else if (resto === 11 || resto === 0) {
+      dvCalculado = '0';
+    } else {
+      dvCalculado = String(resto);
+    }
+  
+    return dvCalculado === digito;
+  };
+  
+  
+
+
 
   // 🔥 Função para validar CPF (algoritmo oficial)
   const validarCPF = (cpf) => {
@@ -44,6 +100,17 @@ const StepDadosPessoais = ({ nextStep, updateFormData, formData, isMobile }) => 
     updateFormData({ cpf: cpfFormatado });
   };
 
+  const handleRGChange = (e) => {
+    const valor = e.target.value;
+    updateFormData({ rg: valor });
+  
+    // Valida em tempo real se o campo tiver 9 caracteres
+    if (valor.replace(/[^\dXx]/g, "").length === 9) {
+      setRgValido(validarRG(valor));
+    } else {
+      setRgValido(true); // evita erro enquanto digita
+    }
+  };
 
 
 
@@ -81,15 +148,20 @@ const StepDadosPessoais = ({ nextStep, updateFormData, formData, isMobile }) => 
       {!cpfValido && <span className="erro-cpf">CPF inválido!</span>} {/* Exibe erro */}
         </div>
 
-        <div>
-          <label>RG *</label>
-          <input
-            type="text"
-            value={formData.rg}
-            onChange={(e) => updateFormData({ rg: e.target.value })}
-            required
-          />
-        </div>
+      <div>
+        <label>RG *</label>
+        <input
+          type="text"
+          value={formData.rg}
+          onChange={handleRGChange}
+          required
+          placeholder="0.000.000-XX"
+          maxLength="12"
+          className={rgValido ? "" : "input-invalido"}
+        />
+        {!rgValido && <span className="erro-rg">RG inválido!</span>}
+      </div>
+
       </div>
 
       <div>
@@ -104,9 +176,9 @@ const StepDadosPessoais = ({ nextStep, updateFormData, formData, isMobile }) => 
 
       <div className="button-group">
       <button
-          className={`botao-proximo ${cpfValido ? "botao-habilitado" : "botao-desabilitado"}`}
+          className={`botao-proximo ${formCompleto ? "botao-habilitado" : "botao-desabilitado"}`}
           onClick={nextStep}
-          disabled={!cpfValido}
+          disabled={!formCompleto}
         >
           Próximo
         </button>

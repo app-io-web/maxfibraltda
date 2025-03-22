@@ -44,7 +44,7 @@ const GooglePlacesService = {
       if (types.includes("postal_code")) endereco.cep = component.long_name;
     });
 
-    console.log("Endereço extraído do Google Places:", endereco);
+    //console.log("Endereço extraído do Google Places:", endereco);
 
     // Atualiza os campos antes de buscar os CEPs
     updateFormData({
@@ -61,7 +61,7 @@ const GooglePlacesService = {
       if (typeof buscarCepAlternativo === "function") {
         buscarCepAlternativo(endereco.estado, endereco.cidade, endereco.rua)
           .then((ceps) => {
-            console.log("CEPs encontrados pelo ViaCEP:", ceps);
+            //console.log("CEPs encontrados pelo ViaCEP:", ceps);
             if (ceps && ceps.length > 0) {
               updateFormData({ cep: ceps[0].cep }); // Define o primeiro CEP encontrado
               setCepsDisponiveis(ceps); // Atualiza a lista de CEPs disponíveis no dropdown

@@ -30,7 +30,7 @@ const FormularioService = {
       };
 
       // 🔍 Log dos dados antes do envio
-      console.log("📤 Enviando para API:", JSON.stringify(dadosCorrigidos, null, 2));
+      //console.log("📤 Enviando para API:", JSON.stringify(dadosCorrigidos, null, 2));
 
       // 🔥 Fazendo a requisição
       const response = await fetch(API_URL, {

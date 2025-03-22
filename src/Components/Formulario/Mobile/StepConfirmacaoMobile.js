@@ -4,10 +4,13 @@ import "dayjs/locale/pt-br";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "../../../Styles/Formulario/Mobile/StepConfirmacaoMobile.css";
 import FormularioService from "../../../Services/FormularioService"; // 🔥 Importa o service
+import ModalConfirmacao from "../ModalConfirmacao"; // ajuste o caminho se necessário
 
 const StepConfirmacaoMobile = ({ prevStep, formData }) => {
   const [expandedSection, setExpandedSection] = useState(null);
   const [loading, setLoading] = useState(false); // 🔥 Estado de loading
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [protocoloGerado, setProtocoloGerado] = useState("");
 
   // Alterna visibilidade da seção
   const toggleSection = (section) => {
@@ -48,14 +51,14 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
     });
 
     // 🔍 Depuração: Verifica os dados antes de enviar
-    console.log("📤 Dados corrigidos enviados:", JSON.stringify(dadosCorrigidos, null, 2));
+    //console.log("📤 Dados corrigidos enviados:", JSON.stringify(dadosCorrigidos, null, 2));
 
     // 🚨 Verificação de campos obrigatórios
     const camposObrigatorios = ["nome", "cpf", "telefone1", "email", "cidade", "bairro", "rua", "cep", "numero", "vendedor", "vendedorEmail"];
     const camposFaltando = camposObrigatorios.filter((campo) => !dadosCorrigidos[campo]);
 
     if (camposFaltando.length > 0) {
-      console.error("❌ Campos obrigatórios ausentes:", camposFaltando);
+      //console.error("❌ Campos obrigatórios ausentes:", camposFaltando);
       alert(`⚠️ Os seguintes campos estão vazios e são obrigatórios:\n\n${camposFaltando.join("\n")}`);
       setLoading(false);
       return;
@@ -64,7 +67,9 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
     try {
       const response = await FormularioService.enviarFormulario(dadosCorrigidos);
 
-      alert(`✅ Cadastro enviado com sucesso!\n\n📌 Protocolo: ${response.protocolo}`);
+      // ✅ Em vez de alert, exibe o modal
+      setProtocoloGerado(response.protocolo);
+      setMostrarModal(true);
 
     } catch (error) {
       console.error("❌ Erro ao enviar formulário:", error);
@@ -156,7 +161,7 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
         {expandedSection === "plano" && (
           <div className="accordion-content">
             <p><strong>Plano:</strong> {formData.plano}</p>
-            <p><strong>Streaming Adicional:</strong> {formData.streaming || "Nenhum"}</p>
+            <p><strong>Serviço Adicional:</strong> {formData.streaming || "Nenhum"}</p>
             <p><strong>Data de Vencimento:</strong> {formData.vencimento}</p>
             <p><strong>Vendedor:</strong> {formData.vendedor}</p>
           </div>
@@ -174,6 +179,14 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
           {loading ? "Enviando..." : "Finalizar Cadastro"}
         </button>
       </div>
+
+      {mostrarModal && (
+      <ModalConfirmacao
+        protocolo={protocoloGerado}
+        onClose={() => setMostrarModal(false)}
+      />
+    )}
+
     </div>
   );
 };

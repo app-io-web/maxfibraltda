@@ -10,7 +10,20 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
   const [streamingOptions, setStreamingOptions] = useState([]);
   const [vendedores, setVendedores] = useState([]); // ✅ Estado para armazenar vendedores
   const [isEditingPlano, setIsEditingPlano] = useState(false);
+  
   const [selectedPlano, setSelectedPlano] = useState(formData.plano);
+
+  const [dadosPlanoValidos, setDadosPlanoValidos] = useState(false);
+
+  useEffect(() => {
+    const planoPreenchido = !!formData.plano;
+    const vencimentoSelecionado = !!formData.vencimento;
+    const vendedorSelecionado = !!formData.vendedor;
+
+    setDadosPlanoValidos(planoPreenchido && vencimentoSelecionado && vendedorSelecionado);
+  }, [formData]);
+
+
 
   useEffect(() => {
     const fetchStreamingOptions = async () => {
@@ -45,7 +58,7 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
       return;
     }
 
-    console.log("🚀 Enviando dados para Cadastro:", formData);
+    //console.log("🚀 Enviando dados para Cadastro:", formData);
 
     nextStep();
   };
@@ -94,7 +107,7 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
         <PrecoPlano plano={formData.plano} />
       </div>
 
-      <label>Streaming Adicional:</label>
+      <label>Serviço Adicional:</label>
       <select value={formData.streaming} onChange={(e) => updateFormData({ streaming: e.target.value })}>
         <option value="">Nenhum</option>
         {streamingOptions.map((service, index) => (
@@ -132,9 +145,14 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
         <button className="voltar" onClick={prevStep}>
           Voltar
         </button>
-        <button className="proximo" onClick={handleNext}>
-          Próximo
-        </button>
+          <button
+            className={`proximo ${dadosPlanoValidos ? "btn-ativo" : "btn-desativado"}`}
+            onClick={handleNext}
+            disabled={!dadosPlanoValidos}
+          >
+            Próximo
+          </button>
+
       </div>
     </div>
   );

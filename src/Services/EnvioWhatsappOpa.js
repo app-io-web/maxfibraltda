@@ -4,7 +4,7 @@ const API_URL = "https://api.opasuite.nexusnerds.com.br/send-whatsapp"; // Alter
 
 export const enviarMensagemWhatsApp = async (nome, telefone, departamento) => {
     try {
-        console.log("Dados enviados para o servidor:", { nome, telefone, departamento }); // 👀 LOG PARA DEBUG
+        //console.log("Dados enviados para o servidor:", { nome, telefone, departamento }); // 👀 LOG PARA DEBUG
 
         const response = await axios.post(API_URL, {
             nome,

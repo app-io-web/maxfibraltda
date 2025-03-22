@@ -12,10 +12,80 @@ const StepDadosPessoaisMobile = ({ nextStep, updateFormData, formData }) => {
   const [dataNascimento, setDataNascimento] = useState(formData.dataNascimento || "");
   const [cpfValido, setCpfValido] = useState(true); // Estado para validação do CPF
 
+  const [formCompleto, setFormCompleto] = useState(false);
+  const [rgValido, setRgValido] = useState(true);
+
+
+
+  // Verifica se todos os campos estão preenchidos
+  useEffect(() => {
+    const camposPreenchidos =
+      formData.nome?.trim() &&
+      formData.cpf?.trim() &&
+      formData.rg?.trim() &&
+      formData.dataNascimento?.trim();
+
+    setFormCompleto(Boolean(camposPreenchidos && cpfValido));
+  }, [formData, cpfValido]);
+
+
+
+
+
+
   useEffect(() => {
     // Define a data máxima para impedir usuários com menos de 18 anos
     setMaxDate(dayjs().subtract(18, "year"));
   }, []);
+
+
+  const validarRG = (rg) => {
+    if (!rg) return false;
+  
+    // Remove tudo que não for número ou 'X'
+    const rgLimpo = rg.replace(/[^\dXx]/g, "").toUpperCase();
+  
+    // Tem que ter 9 dígitos
+    if (rgLimpo.length !== 9) return false;
+  
+    const corpo = rgLimpo.slice(0, 8);
+    const digito = rgLimpo.slice(8);
+  
+    let soma = 0;
+    let peso = 2;
+  
+    for (let i = 7; i >= 0; i--) {
+      soma += parseInt(corpo[i]) * peso;
+      peso++;
+    }
+  
+    let resto = soma % 11;
+    let dvCalculado;
+  
+    if (resto === 10) {
+      dvCalculado = 'X';
+    } else if (resto === 11 || resto === 0) {
+      dvCalculado = '0';
+    } else {
+      dvCalculado = String(resto);
+    }
+  
+    return dvCalculado === digito;
+  };
+
+  const handleRGChange = (e) => {
+    const valor = e.target.value;
+    updateFormData({ rg: valor });
+  
+    // Valida em tempo real se o campo tiver 9 caracteres
+    if (valor.replace(/[^\dXx]/g, "").length === 9) {
+      setRgValido(validarRG(valor));
+    } else {
+      setRgValido(true); // evita erro enquanto digita
+    }
+  };
+
+
 
   const handleTextChange = (e) => {
     let valor = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
@@ -93,13 +163,17 @@ const StepDadosPessoaisMobile = ({ nextStep, updateFormData, formData }) => {
       />
       {!cpfValido && <span className="erro-cpf">CPF inválido!</span>} {/* Exibe erro */}
 
-      <label>RG </label>
-      <input
-        type="text"
-        value={formData.rg}
-        onChange={(e) => updateFormData({ rg: e.target.value })}
-        required
-      />
+      <label>RG *</label>
+        <input
+          type="text"
+          value={formData.rg}
+          onChange={handleRGChange}
+          required
+          placeholder="0.000.000-XX"
+          maxLength="12"
+          className={rgValido ? "" : "input-invalido"}
+        />
+        {!rgValido && <span className="erro-rg">RG inválido!</span>}
 
       {/* 🔥 Alternar entre seleção e digitação manual */}
       <div className="data-nascimento-container">
@@ -135,13 +209,13 @@ const StepDadosPessoaisMobile = ({ nextStep, updateFormData, formData }) => {
       )}
 
       <div className="button-group-mobileForm">
-      <button
-          className={`botao-proximo ${cpfValido ? "botao-habilitado" : "botao-desabilitado"}`}
-          onClick={nextStep}
-          disabled={!cpfValido}
-        >
-          Próximo
-        </button>
+            <button
+                className={`botao-proximo ${formCompleto ? "botao-habilitado" : "botao-desabilitado"}`}
+                onClick={nextStep}
+                disabled={!formCompleto}
+              >
+                Próximo
+              </button>
       </div>
     </div>
   );

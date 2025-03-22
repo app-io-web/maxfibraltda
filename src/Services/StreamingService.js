@@ -5,11 +5,11 @@ const API_TOKEN = process.env.REACT_APP_NOCODB_TOKEN;
 
 const StreamingService = {
   async getStreamingByPlano(plano) {
-    console.log(`🔍 Buscando serviços de streaming para o plano: ${plano}`);
+    //console.log(`🔍 Buscando serviços de streaming para o plano: ${plano}`);
 
     try {
       const columnName = `Plano ${plano}`;
-      console.log(`📌 Coluna que será consultada: ${columnName}`);
+      //console.log(`📌 Coluna que será consultada: ${columnName}`);
 
       const response = await axios.get(API_URL, {
         headers: {
@@ -22,7 +22,7 @@ const StreamingService = {
         }
       });
 
-      console.log("✅ Resposta da API:", response.data);
+      //console.log("✅ Resposta da API:", response.data);
 
       if (!response.data.list || response.data.list.length === 0) {
         console.warn("⚠️ Nenhum serviço de streaming encontrado para este plano.");

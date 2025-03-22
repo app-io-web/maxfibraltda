@@ -1,0 +1,41 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    color: black;
+}
+
+
+  .modal-content h2 {
+    color: #28a745;
+    margin-bottom: 15px;
+  }
+  
+  .modal-content .btn-fechar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

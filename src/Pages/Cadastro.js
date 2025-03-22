@@ -32,6 +32,9 @@ const Cadastro = () => {
       {!isMobile ? <Header /> : <MobileHeader />}
   
       <div className={isMobile ? "cadastro-container-mobile" : "cadastro-container"}>
+
+
+        
         {/* Versão Desktop */}
         {!isMobile && (
           <>

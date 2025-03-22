@@ -6,7 +6,7 @@ export const fetchSocialLinks = async () => {
   try {
     const url = `${API_URL}/api/v2/tables/${TABLE_ID}/records`;
 
-    console.log("📡 Fazendo requisição para:", url);
+    //console.log("📡 Fazendo requisição para:", url);
 
     const response = await fetch(url, {
       method: "GET",
@@ -16,7 +16,7 @@ export const fetchSocialLinks = async () => {
       },
     });
 
-    console.log("🔄 Status da resposta:", response.status);
+    //console.log("🔄 Status da resposta:", response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -24,7 +24,7 @@ export const fetchSocialLinks = async () => {
     }
 
     const data = await response.json();
-    console.log("✅ Dados recebidos:", data);
+    //console.log("✅ Dados recebidos:", data);
 
     if (data.list.length === 0) return [];
 

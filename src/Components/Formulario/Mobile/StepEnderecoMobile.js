@@ -8,6 +8,20 @@ import Localizacao from "../Localizacao";
 const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
   const [showModal, setShowModal] = useState(false);
   const [cepsDisponiveis, setCepsDisponiveis] = useState([]);
+  const [enderecoValido, setEnderecoValido] = useState(false);
+
+
+
+  useEffect(() => {
+    const camposPreenchidos =
+      formData.cidade?.trim() &&
+      formData.bairro?.trim() &&
+      formData.cep?.trim() &&
+      formData.rua?.trim() &&
+      formData.numero?.trim();
+  
+    setEnderecoValido(Boolean(camposPreenchidos));
+  }, [formData]);
 
   useEffect(() => {
     const localizacaoAceita = localStorage.getItem("localizacaoAceita");
@@ -45,7 +59,7 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
           (uf, cidade, rua) => {
             return ViaCEPService.buscarCepPorEndereco(uf, cidade, rua)
               .then((ceps) => {
-                console.log("CEPs encontrados:", ceps);
+                //console.log("CEPs encontrados:", ceps);
                 setCepsDisponiveis(ceps);
 
                 // 🔥 Se houver apenas um CEP, atualiza automaticamente
@@ -190,7 +204,13 @@ const StepEnderecoMobile = ({ nextStep, prevStep, updateFormData, formData }) =>
 
       <div className="button-group-mobile">
         <button className="voltar-mobile" onClick={prevStep}>Voltar</button>
-        <button className="proximo-mobile" onClick={nextStep}>Próximo</button>
+        <button
+            className={`proximo ${enderecoValido ? "btn-ativo" : "btn-desativado"}`}
+            onClick={nextStep}
+            disabled={!enderecoValido}
+          >
+            Próximo
+          </button>
       </div>
     </div>
   );

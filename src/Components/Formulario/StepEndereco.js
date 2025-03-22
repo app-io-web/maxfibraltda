@@ -9,6 +9,18 @@ const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
   const [showModal, setShowModal] = useState(false);
   const [autocomplete, setAutocomplete] = useState(null);
   const [cepsDisponiveis, setCepsDisponiveis] = useState([]);
+  const [enderecoValido, setEnderecoValido] = useState(false);
+
+useEffect(() => {
+  const camposPreenchidos =
+    formData.cidade?.trim() &&
+    formData.bairro?.trim() &&
+    formData.cep?.trim() &&
+    formData.rua?.trim() &&
+    formData.numero?.trim();
+
+  setEnderecoValido(Boolean(camposPreenchidos));
+}, [formData]);
 
   useEffect(() => {
     const localizacaoAceita = localStorage.getItem("localizacaoAceita");
@@ -29,7 +41,7 @@ const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
           (uf, cidade, rua) => {
             return ViaCEPService.buscarCepPorEndereco(uf, cidade, rua)
               .then((ceps) => {
-                console.log("CEPs encontrados:", ceps);
+                //console.log("CEPs encontrados:", ceps);
                 setCepsDisponiveis(ceps);
               })
               .catch((error) => console.error("Erro ao definir CEPs:", error));
@@ -46,11 +58,11 @@ const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
 
   useEffect(() => {
     if (formData.estado && formData.cidade && formData.rua) {
-      console.log("Buscando CEPs para:", formData.estado, formData.cidade, formData.rua);
+      //console.log("Buscando CEPs para:", formData.estado, formData.cidade, formData.rua);
       
       ViaCEPService.buscarCepPorEndereco(formData.estado, formData.cidade, formData.rua)
         .then((ceps) => {
-          console.log("CEPs encontrados:", ceps);
+          //console.log("CEPs encontrados:", ceps);
           setCepsDisponiveis(ceps); // Atualiza os CEPs disponíveis no dropdown
         })
         .catch((error) => console.error("Erro ao definir CEPs:", error));
@@ -152,7 +164,14 @@ const StepEndereco = ({ nextStep, prevStep, updateFormData, formData }) => {
       </div>
       <div className="button-group">
         <button className="voltar" onClick={prevStep}>Voltar</button>
-        <button className="proximo" onClick={nextStep}>Próximo</button>
+        <button
+            className={`proximo ${enderecoValido ? "btn-ativo" : "btn-desativado"}`}
+            onClick={nextStep}
+            disabled={!enderecoValido}
+          >
+            Próximo
+          </button>
+
       </div>
     </div>
   );

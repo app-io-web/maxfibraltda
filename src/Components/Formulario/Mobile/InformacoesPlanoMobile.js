@@ -39,7 +39,7 @@ const InformacoesPlanoMobile = ({ plano, streaming, vencimento }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Verifica se Streaming Adicional ou Data de Vencimento foi selecionado
+  // Verifica se Serviço Adicional ou Data de Vencimento foi selecionado
   const hasNewData = streamingAtual !== "" || vencimentoAtual !== "";
 
   return (
@@ -76,7 +76,7 @@ const InformacoesPlanoMobile = ({ plano, streaming, vencimento }) => {
 
           {streamingAtual && streamingAtual !== "" && (
             <div className="plano-item">
-              <span className="plano-label">Streaming Adicional:</span>
+              <span className="plano-label">Serviço Adicional:</span>
               <span className="plano-valor">{streamingAtual}</span>
             </div>
           )}

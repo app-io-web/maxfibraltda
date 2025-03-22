@@ -128,7 +128,7 @@ const WhatsAppModal = ({ isOpen, onClose }) => {
               // Enviar e-mail com os detalhes do atendimento
               const emailResponse = await enviarEmailAtendimento(nome, cpf, telefone, email, departamento, mensagem);
   
-              console.log("Resposta da API de e-mail:", emailResponse);
+              //console.log("Resposta da API de e-mail:", emailResponse);
   
               if (emailResponse.message && emailResponse.message.includes("sucesso")) {
                   setProtocolo(emailResponse.protocolo); // Salva o protocolo retornado pela API

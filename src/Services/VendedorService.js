@@ -17,7 +17,7 @@ const VendedorService = {
         },
       });
 
-      console.log("🔍 Resposta completa da API:", response.data);
+      //console.log("🔍 Resposta completa da API:", response.data);
 
       if (!response.data.list || response.data.list.length === 0) {
         console.warn("⚠️ Nenhum vendedor encontrado!");
@@ -34,7 +34,7 @@ const VendedorService = {
       // ✅ Converte para array de objetos [{ nome: "Joao", email: "joao@email.com" }, ...]
       const vendedores = Object.values(primeiroRegistro.Vendedor);
 
-      console.log("✅ Vendedores encontrados:", vendedores);
+      //console.log("✅ Vendedores encontrados:", vendedores);
       return vendedores;
     } catch (error) {
       console.error("❌ Erro ao buscar vendedores:", error);

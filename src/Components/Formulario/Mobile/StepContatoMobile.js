@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../../Styles/Formulario/Mobile/StepContatoMobile.css";
 
 const StepContatoMobile = ({ nextStep, prevStep, updateFormData, formData }) => {
   const [telefonesIguais, setTelefonesIguais] = useState(false);
   const [mostrarTelefone3, setMostrarTelefone3] = useState(false); // 🔥 Controla o campo de Telefone 3
+  const [telefonesValidos, setTelefonesValidos] = useState(false);
+
+  useEffect(() => {
+    const isEmailValido = (email) => /\S+@\S+\.\S+/.test(email);
+    const limparNumero = (num) => num?.replace(/\D/g, "");
+  
+    const emailOk = isEmailValido(formData.email);
+    const t1 = limparNumero(formData.telefone1);
+    const t2 = limparNumero(formData.telefone2);
+    const t3 = limparNumero(formData.telefone3 || "");
+  
+    const telefonesOk = t1?.length >= 10 && t2?.length >= 10;
+    const semDuplicatas =
+      t1 !== t2 &&
+      (!mostrarTelefone3 || (t3.length >= 10 && t3 !== t1 && t3 !== t2));
+  
+    setTelefonesValidos(emailOk && telefonesOk && semDuplicatas);
+  }, [formData, mostrarTelefone3]);
+
 
   // 🔥 Função para formatar telefone corretamente sem travar no "-"
   const formatarTelefone = (valor) => {
@@ -93,12 +112,13 @@ const StepContatoMobile = ({ nextStep, prevStep, updateFormData, formData }) => 
       <div className="button-group-mobile">
         <button className="voltar-mobile" onClick={prevStep}>Voltar</button>
         <button
-          className={`proximo-mobile ${telefonesIguais ? "btn-desativado" : "btn-ativo"}`}
-          onClick={nextStep}
-          disabled={telefonesIguais} // 🔥 Desativa se os telefones forem iguais
-        >
-          Próximo
-        </button>
+            className={`proximo ${telefonesValidos ? "btn-ativo" : "btn-desativado"}`}
+            onClick={nextStep}
+            disabled={!telefonesValidos}
+          >
+            Próximo
+          </button>
+
       </div>
     </div>
   );
