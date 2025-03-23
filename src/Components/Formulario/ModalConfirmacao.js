@@ -4,7 +4,7 @@ import "../../Styles/Formulario/ModalConfirmacao.css"; // crie esse CSS ou ajust
 const ModalConfirmacao = ({ protocolo, onClose }) => {
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-contentCad">
         <h2>✅ Cadastro Feito com Sucesso!</h2>
         <p>📌 <strong>Protocolo:</strong> {protocolo}</p>
         <button onClick={onClose} className="btn-fechar">OK</button>

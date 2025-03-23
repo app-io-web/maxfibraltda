@@ -5,6 +5,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "../../../Styles/Formulario/Mobile/StepConfirmacaoMobile.css";
 import FormularioService from "../../../Services/FormularioService"; // 🔥 Importa o service
 import ModalConfirmacao from "../ModalConfirmacao"; // ajuste o caminho se necessário
+import WebhookService from "../../../Services/WebhookService"; // 👈 novo service
 
 const StepConfirmacaoMobile = ({ prevStep, formData }) => {
   const [expandedSection, setExpandedSection] = useState(null);
@@ -66,6 +67,10 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
 
     try {
       const response = await FormularioService.enviarFormulario(dadosCorrigidos);
+
+
+        // ✅ Envia para o webhook do n8n
+      await WebhookService.enviarParaWebhook(dadosCorrigidos);
 
       // ✅ Em vez de alert, exibe o modal
       setProtocoloGerado(response.protocolo);

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import getServicosAdicionais from '../../Services/planosService';
 import { FaWifi, FaTachometerAlt, FaHeadset, FaCheckCircle } from 'react-icons/fa';
 import '../../Styles/Planos.css';
@@ -7,6 +9,13 @@ import '../../Styles/PlanosAnimations.css'; // Importando o CSS de animação
 function Turbo() {
   const [servicos, setServicos] = useState([]);
   const [maisVendido, setMaisVendido] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleAssinar = () => {
+    navigate("/cadastro", { state: { plano: "Turbo" } });
+  };
+
 
   useEffect(() => {
     const fetchServicos = async () => {
@@ -55,7 +64,10 @@ function Turbo() {
 
       <p className="obs">Obs.: Cliente tem acesso exclusivo a apenas 1 dos Apps mencionados acima.</p>
 
-      <button className="assinar-btn">ASSINE AGORA</button>
+      <button className="assinar-btn" onClick={handleAssinar}>
+          ASSINE AGORA
+        </button>
+
     </div>
   );
 }

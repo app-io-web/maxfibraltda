@@ -4,6 +4,8 @@ import "../../Styles/Formulario/StepConfirmacao.css";
 import "../../Styles/Formulario/StepConfirmacaoEstilizado.css";
 import FormularioService from "../../Services/FormularioService"; // 🔥 Importa o service
 import ModalConfirmacao from "./ModalConfirmacao"; // ajuste o caminho se necessário
+import WebhookService from "../../Services/WebhookService"; // 👈 novo service
+
 
 const StepConfirmacao = ({ prevStep, formData }) => {
   const [loading, setLoading] = useState(false); // 🔥 Estado de loading
@@ -62,6 +64,11 @@ const StepConfirmacao = ({ prevStep, formData }) => {
 
     try {
       const response = await FormularioService.enviarFormulario(dadosCorrigidos);
+
+  // ✅ Envia para o webhook do n8n
+   await WebhookService.enviarParaWebhook(dadosCorrigidos);
+
+
 
     // ✅ Em vez de alert, exibe o modal
     setProtocoloGerado(response.protocolo);
