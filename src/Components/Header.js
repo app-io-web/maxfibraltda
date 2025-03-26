@@ -14,8 +14,8 @@ function Header() {
         <ul>
           <li><Link to="/">Início</Link></li>
           <li><Link to="/cadastro">Cadastre-se</Link></li>
+          <li><Link to="/empresas">Empresas</Link></li>
           <li><a href="#sobre-nos">Sobre Nós</a></li>
-          <li><a href="#empresas">Empresas</a></li>
           <li><a href="#trabalhe-conosco">Trabalhe Conosco</a></li>
         </ul>
       </nav>

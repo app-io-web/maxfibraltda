@@ -5,6 +5,7 @@ import "./Styles/index.css";
 import Home from "./Pages/Home";
 import LoadingScreen from "./Components/LoadingScreen";
 import Cadastro from "./Pages/Cadastro";
+import Empresas from "./Pages/Empresas";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/empresas" element={<Empresas />} />
           {/* Redireciona para home se a rota não existir */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

@@ -1,0 +1,94 @@
+.plano-empresarial-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 17px 20px;
+  height: 464px;
+  width: 337px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* novo: layout flex para espaçar conteúdo e alinhar botão no final */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+  
+  .plano-empresarial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .plano-empresarial-header {
+    background-color: #00d41c;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 12px;
+    border-radius: 12px 12px 0 0;
+    margin: -30px -20px 20px;
+  }
+  
+  .plano-empresarial-preco {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .plano-empresarial-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 20px;
+  
+    /* novo */
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .plano-empresarial-info span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  
+  /* Ícones (você pode usar React Icons ou emojis por enquanto) */
+  .plano-icon {
+    color: #00d41c;
+    font-size: 1.1rem;
+  }
+  
+
+  .botao-beneficios {
+  padding: 12px 20px;
+  border: 2px solid black;
+  background: transparent;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto; /* novo: garante alinhamento inferior */
+}
+
+.botao-beneficios:hover {
+  background-color: #00d41c;
+  color: white;
+  border-color: #00d41c;
+}
+
+@media (max-width: 768px) {
+  .swiper-slide {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .plano-empresarial-card {
+    width: 90vw; /* ocupa 90% da largura da tela */
+    max-width: 337px; /* limite máximo */
+  }
+}
