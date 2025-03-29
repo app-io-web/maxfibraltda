@@ -5,7 +5,7 @@ import StreamingService from "../../Services/StreamingService";
 import VendedorService from "../../Services/VendedorService";
 import "../../Styles/Formulario/StepPlano.css";
 
-const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
+const StepPlano = ({ nextStep, prevStep, updateFormData, formData, tipoDocumento }) => {
   const navigate = useNavigate();
   const [streamingOptions, setStreamingOptions] = useState([]);
   const [vendedores, setVendedores] = useState([]); // ✅ Estado para armazenar vendedores
@@ -14,11 +14,14 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
   const [selectedPlano, setSelectedPlano] = useState(formData.plano);
 
   const [dadosPlanoValidos, setDadosPlanoValidos] = useState(false);
+  const isCNPJ = formData.tipoDocumento === "CNPJ";
+
 
   useEffect(() => {
     const planoPreenchido = !!formData.plano;
     const vencimentoSelecionado = !!formData.vencimento;
     const vendedorSelecionado = !!formData.vendedor;
+
 
     setDadosPlanoValidos(planoPreenchido && vencimentoSelecionado && vendedorSelecionado);
   }, [formData]);
@@ -41,6 +44,21 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
     fetchStreamingOptions();
     fetchVendedores();
   }, [formData.plano]);
+
+
+  useEffect(() => {
+    if (isCNPJ && (!formData.plano || !["Big Company", "Medium Company", "Startup Company"].includes(formData.plano))) {
+      updateFormData({ plano: "Startup Company" });
+      setSelectedPlano("Startup Company");
+    } else if (!isCNPJ && (!formData.plano || !["Gold", "Infinity", "Turbo"].includes(formData.plano))) {
+      updateFormData({ plano: "Gold" });
+      setSelectedPlano("Gold");
+    }
+  }, [isCNPJ]);
+  
+  
+
+
 
   const handleNext = () => {
     if (!formData.plano) {
@@ -90,11 +108,26 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
       <label>Plano Selecionado:</label>
       <div className="plano-selecionado-container">
         {isEditingPlano ? (
-          <select value={selectedPlano} onChange={(e) => setSelectedPlano(e.target.value)} className="plano-edit-select">
-            <option value="Gold">Gold</option>
-            <option value="Infinity">Infinity</option>
-            <option value="Turbo">Turbo</option>
-          </select>
+          <select
+              value={selectedPlano}
+              onChange={(e) => setSelectedPlano(e.target.value)}
+              className="plano-edit-select"
+            >
+              {isCNPJ ? (
+                <>
+                  <option value="Big Company">Big Company</option>
+                  <option value="Medium Company">Medium Company</option>
+                  <option value="Startup Company">Startup Company</option>
+                </>
+              ) : (
+                <>
+                  <option value="Gold">Gold</option>
+                  <option value="Infinity">Infinity</option>
+                  <option value="Turbo">Turbo</option>
+                </>
+              )}
+            </select>
+
         ) : (
           <span className="plano-text">{formData.plano}</span>
         )}
@@ -107,15 +140,23 @@ const StepPlano = ({ nextStep, prevStep, updateFormData, formData }) => {
         <PrecoPlano plano={formData.plano} />
       </div>
 
-      <label>Serviço Adicional:</label>
-      <select value={formData.streaming} onChange={(e) => updateFormData({ streaming: e.target.value })}>
-        <option value="">Nenhum</option>
-        {streamingOptions.map((service, index) => (
-          <option key={index} value={service}>
-            {service}
-          </option>
-        ))}
-      </select>
+      {!isCNPJ && (
+        <>
+          <label>Serviço Adicional:</label>
+          <select
+            value={formData.streaming}
+            onChange={(e) => updateFormData({ streaming: e.target.value })}
+          >
+            <option value="">Nenhum</option>
+            {streamingOptions.map((service, index) => (
+              <option key={index} value={service}>
+                {service}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
+
 
       <label>Data de Vencimento:</label>
       <select

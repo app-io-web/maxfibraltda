@@ -14,6 +14,10 @@ const Cadastro = () => {
   const [planoSelecionado, setPlanoSelecionado] = useState(location.state?.plano || "Gold");
   const [streamingSelecionado, setStreamingSelecionado] = useState(location.state?.streaming || "");
   const [vencimentoSelecionado, setVencimentoSelecionado] = useState(location.state?.vencimento || "");
+  const planoInicial = location.state?.planoInicial || "Gold";
+  const tipoDocumentoInicial = location.state?.tipoDocumentoInicial || "CPF";
+
+  
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -44,8 +48,10 @@ const Cadastro = () => {
               vencimento={vencimentoSelecionado} 
             />
             <Formulario
-              setPlanoSelecionado={setPlanoSelecionado} 
-              setStreamingSelecionado={setStreamingSelecionado} 
+              planoInicial={planoInicial}
+              tipoDocumentoInicial={tipoDocumentoInicial}
+              setPlanoSelecionado={setPlanoSelecionado}
+              setStreamingSelecionado={setStreamingSelecionado}
               setVencimentoSelecionado={setVencimentoSelecionado}
             />
           </>
@@ -60,8 +66,10 @@ const Cadastro = () => {
               vencimento={vencimentoSelecionado} 
             />
             <FormularioMobile
-              setPlanoSelecionado={setPlanoSelecionado} 
-              setStreamingSelecionado={setStreamingSelecionado} 
+              planoInicial={planoInicial}
+              tipoDocumentoInicial={tipoDocumentoInicial}
+              setPlanoSelecionado={setPlanoSelecionado}
+              setStreamingSelecionado={setStreamingSelecionado}
               setVencimentoSelecionado={setVencimentoSelecionado}
             />
           </div>

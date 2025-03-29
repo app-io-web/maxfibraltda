@@ -1,17 +1,29 @@
 // StartupCompany.js
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { buscarPlanosEmpresariais } from '../../Services/Empresarial/servicePlanosEmpresariais';
 import '../../Styles/PlanosEmpresariais.css';
 import { FaWifi, FaHeadset, FaClock, FaNetworkWired } from 'react-icons/fa';
 
 function StartupCompany() {
   const [dados, setDados] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     buscarPlanosEmpresariais().then(data => {
       if (data) setDados(data.startup);
     });
   }, []);
+
+  const handleAssineAgora = () => {
+    navigate("/cadastro", {
+      state: {
+        plano: "Startup Company",
+        tipoDocumento: "CNPJ"
+      }
+    });
+    
+  };
 
   const scrollToContato = () => {
     const section = document.getElementById('formulario-contato');
@@ -33,11 +45,9 @@ function StartupCompany() {
       React.createElement('span', null, React.createElement(FaClock, { className: 'plano-icon' }), `SLA: ${dados.Tempo_de_SLA}`),
       React.createElement('span', null, React.createElement(FaHeadset, { className: 'plano-icon' }), dados.Suporte)
     ),
-    React.createElement(
-      'button',
-      { className: 'botao-beneficios', onClick: scrollToContato },
-      'ASSINE AGORA'
-    )
+    <button className="botao-beneficios" onClick={handleAssineAgora}>
+      ASSINE AGORA
+    </button>
   );
 }
 

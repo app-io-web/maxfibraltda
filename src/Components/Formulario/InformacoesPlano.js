@@ -4,16 +4,23 @@ import "../../Styles/Formulario/InformacoesPlano.css";
 const precosPlanos = {
   "Gold": "R$ 129,90 / mês",
   "Infinity": "R$ 169,90 / mês",
-  "Turbo": "R$ 99,90 / mês"
+  "Turbo": "R$ 99,90 / mês",
+  "Startup Company": "R$ 199,90 / mês",
+  "Medium Company": "R$ 299,90 / mês",
+  "Big Company": "R$ 399,90 / mês"
 };
 
 const velocidadesPlanos = {
   "Gold": "600 Mega",
   "Infinity": "800 Mega",
-  "Turbo": "400 Mega"
+  "Turbo": "400 Mega",
+  "Startup Company": "50 Mega",
+  "Medium Company": "100 Mega",
+  "Big Company": "200 Mega"
 };
 
-const InformacoesPlano = ({ plano, streaming, vencimento }) => {
+
+const InformacoesPlano = ({ plano, streaming, vencimento, tipoDocumento }) => {
   const [planoAtual, setPlanoAtual] = useState(plano);
   const [streamingAtual, setStreamingAtual] = useState(streaming);
   const [vencimentoAtual, setVencimentoAtual] = useState(vencimento);
@@ -55,12 +62,13 @@ const InformacoesPlano = ({ plano, streaming, vencimento }) => {
           <span className="plano-valor">Incluído</span>
         </div>
 
-        {streamingAtual && streamingAtual !== "" && (
+        {tipoDocumento !== "CNPJ" && streamingAtual && streamingAtual !== "" && (
           <div className="plano-item">
             <span className="plano-label">Serviço Adicional:</span>
-            <span className="plano-valor">{streamingAtual || "Não selecionado"}</span>
+            <span className="plano-valor">{streamingAtual}</span>
           </div>
         )}
+
 
         <div className="plano-item">
           <span className="plano-label">Data de Vencimento:</span>

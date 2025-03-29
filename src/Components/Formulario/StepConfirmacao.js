@@ -21,59 +21,56 @@ const StepConfirmacao = ({ prevStep, formData }) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-
-    // 🚀 Garante que o email do vendedor também seja enviado
+  
     if (!formData.vendedor || !formData.vendedorEmail) {
       alert("Erro: O vendedor e o e-mail do vendedor são obrigatórios!");
       setLoading(false);
       return;
     }
-
-    // 🚀 Corrige e garante que os campos essenciais estão preenchidos corretamente
+  
+    const isEmpresa = formData.tipoDocumento === "CNPJ";
+  
     const dadosCorrigidos = {
       ...formData,
-      endereco: formData.endereco?.trim() || formData.rua?.trim() || "", // Se rua estiver vazia, evitar erro
-      rua: formData.rua?.trim() || formData.endereco?.trim() || "", // Garante que rua sempre tenha valor
-      telefone1: formData.telefone1?.trim() || "N/A", // Evita undefined ou string vazia
-      telefone3: formData.telefone3?.trim() || "", // Garante que telefone3 seja enviado, mesmo se vazio
-      latitude: formData.latitude ? String(formData.latitude) : "", // Converte para string se existir
-      longitude: formData.longitude ? String(formData.longitude) : "", // Converte para string se existir
-      vendedorEmail: formData.vendedorEmail, // ✅ Inclui o e-mail do vendedor
+      endereco: formData.endereco?.trim() || formData.rua?.trim() || "",
+      rua: formData.rua?.trim() || formData.endereco?.trim() || "",
+      telefone1: formData.telefone1?.trim() || "N/A",
+      telefone3: formData.telefone3?.trim() || "",
+      latitude: formData.latitude ? String(formData.latitude) : "",
+      longitude: formData.longitude ? String(formData.longitude) : "",
+      vendedorEmail: formData.vendedorEmail,
+      tipoDocumento: formData.tipoDocumento || "CPF", // ✅ Garante que será enviado
+      isEmpresa // ✅ Indica se é empresa ou não
     };
-
-    // 🔍 Remove espaços extras dos campos string
+  
+    // Remove espaços extras de todos os campos string
     Object.keys(dadosCorrigidos).forEach((key) => {
       if (typeof dadosCorrigidos[key] === "string") {
         dadosCorrigidos[key] = dadosCorrigidos[key].trim();
       }
     });
-
-    // 🔍 Depuração: Verifica os dados antes de enviar
-    //console.log("📤 Dados corrigidos enviados:", JSON.stringify(dadosCorrigidos, null, 2));
-
-    // 🚨 Verificação de campos obrigatórios
-    const camposObrigatorios = ["nome", "cpf", "telefone1", "email", "cidade", "bairro", "rua", "cep", "numero", "vendedor", "vendedorEmail"];
+  
+    const camposObrigatorios = [
+      "nome", "cpf", "telefone1", "email",
+      "cidade", "bairro", "rua", "cep",
+      "numero", "vendedor", "vendedorEmail"
+    ];
+  
     const camposFaltando = camposObrigatorios.filter((campo) => !dadosCorrigidos[campo]);
-
+  
     if (camposFaltando.length > 0) {
       console.error("❌ Campos obrigatórios ausentes:", camposFaltando);
       alert(`⚠️ Os seguintes campos estão vazios e são obrigatórios:\n\n${camposFaltando.join("\n")}`);
       setLoading(false);
       return;
     }
-
+  
     try {
       const response = await FormularioService.enviarFormulario(dadosCorrigidos);
-
-  // ✅ Envia para o webhook do n8n
-   await WebhookService.enviarParaWebhook(dadosCorrigidos);
-
-
-
-    // ✅ Em vez de alert, exibe o modal
-    setProtocoloGerado(response.protocolo);
-    setMostrarModal(true);
-
+      await WebhookService.enviarParaWebhook(dadosCorrigidos);
+  
+      setProtocoloGerado(response.protocolo);
+      setMostrarModal(true);
     } catch (error) {
       console.error("❌ Erro ao enviar formulário:", error);
       alert("❌ Erro ao enviar o cadastro. Tente novamente.");
@@ -81,6 +78,7 @@ const StepConfirmacao = ({ prevStep, formData }) => {
       setLoading(false);
     }
   };
+  
 
 
 
@@ -94,16 +92,30 @@ const StepConfirmacao = ({ prevStep, formData }) => {
       <div className="cards-container">
         {/* Card 1 - Dados Pessoais */}
         <div className={`confirmacao-card ${activeCard === "dadosPessoais" ? "ativo" : ""}`} onClick={() => toggleCard("dadosPessoais")}>
-          <h3><FaUser /> Dados Pessoais</h3>
-          {activeCard === "dadosPessoais" && (
-            <div className="conteudo-card">
-              <p><strong>Nome:</strong> {formData.nome}</p>
-              <p><strong>CPF:</strong> {formData.cpf}</p>
-              <p><strong>RG:</strong> {formData.rg}</p>
-              <p><strong>Data de Nascimento:</strong> {formData.dataNascimento}</p>
-            </div>
-          )}
-        </div>
+            <h3><FaUser /> Dados Pessoais</h3>
+            {activeCard === "dadosPessoais" && (
+              <div className="conteudo-card">
+                <p><strong>Nome:</strong> {formData.nome}</p>
+                <p><strong>{formData.tipoDocumento === "CNPJ" ? "CNPJ" : "CPF"}:</strong> {formData.cpf}</p>
+
+                {formData.tipoDocumento === "CPF" && (
+                  <>
+                    <p><strong>RG:</strong> {formData.rg || "Não informado"}</p>
+                    <p><strong>Data de Nascimento:</strong> {formData.dataNascimento || "Não informado"}</p>
+                  </>
+                )}
+
+                {formData.tipoDocumento === "CNPJ" && (
+                  <>
+                    <p><strong>IE (Inscrição Estadual):</strong> {formData.ie || "Não informado"}</p>
+                    <p><strong>Data de Abertura da Empresa:</strong> {formData.dataAberturaEmpresa || "Não informada"}</p>
+                  </>
+                )}
+
+              </div>
+            )}
+          </div>
+
 
         {/* Card 2 - Contato */}
         <div className={`confirmacao-card ${activeCard === "contato" ? "ativo" : ""}`} onClick={() => toggleCard("contato")}>

@@ -14,7 +14,14 @@ import StepEnderecoMobile from "./Mobile/StepEnderecoMobile";
 import StepPlanoMobile from "./Mobile/StepPlanoMobile";
 import StepConfirmacaoMobile from "./Mobile/StepConfirmacaoMobile";
 
-const Formulario = ({ setPlanoSelecionado, setStreamingSelecionado, setVencimentoSelecionado }) => {
+const Formulario = ({
+  setPlanoSelecionado,
+  setStreamingSelecionado,
+  setVencimentoSelecionado,
+  planoInicial = "Gold",
+  tipoDocumentoInicial = "CPF"
+}) => {
+
   const [step, setStep] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Detecta mobile automaticamente
 
@@ -27,12 +34,28 @@ const Formulario = ({ setPlanoSelecionado, setStreamingSelecionado, setVenciment
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [formData, setFormData] = useState({
-    nome: "", cpf: "", rg: "", dataNascimento: "",
-    email: "", telefone1: "", telefone2: "",
-    cidade: "", bairro: "", endereco: "", cep: "", numero: "", complemento: "", latitude: "", longitude: "",
-    plano: "Gold", streaming: "", vencimento: "",
-  });
+const [formData, setFormData] = useState({
+  nome: "",
+  cpf: "",
+  rg: "",
+  dataNascimento: "",
+  email: "",
+  telefone1: "",
+  telefone2: "",
+  cidade: "",
+  bairro: "",
+  endereco: "",
+  cep: "",
+  numero: "",
+  complemento: "",
+  latitude: "",
+  longitude: "",
+  plano: planoInicial,
+  tipoDocumento: tipoDocumentoInicial,
+  streaming: "",
+  vencimento: ""
+});
+
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
@@ -66,7 +89,7 @@ const Formulario = ({ setPlanoSelecionado, setStreamingSelecionado, setVenciment
             {step === 1 && <StepDadosPessoaisMobile nextStep={nextStep} updateFormData={updateFormData} formData={formData} />}
             {step === 2 && <StepContatoMobile nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} />}
             {step === 3 && <StepEnderecoMobile nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} />}
-            {step === 4 && <StepPlanoMobile nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} />}
+            {step === 4 && <StepPlanoMobile nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} tipoDocumento={formData.tipoDocumento}/>}
             {step === 5 && <StepConfirmacaoMobile prevStep={prevStep} formData={formData} />}
           </>
         ) : (
@@ -74,7 +97,7 @@ const Formulario = ({ setPlanoSelecionado, setStreamingSelecionado, setVenciment
             {step === 1 && <StepDadosPessoais nextStep={nextStep} updateFormData={updateFormData} formData={formData} />}
             {step === 2 && <StepContato nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} />}
             {step === 3 && <StepEndereco nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} />}
-            {step === 4 && <StepPlano nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData} />}
+            {step === 4 && <StepPlano nextStep={nextStep} prevStep={prevStep} updateFormData={updateFormData} formData={formData}  tipoDocumento={formData.tipoDocumento} />}
             {step === 5 && <StepConfirmacao prevStep={prevStep} formData={formData} />}
           </>
         )}

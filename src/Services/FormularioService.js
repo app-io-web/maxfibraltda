@@ -3,36 +3,47 @@ const API_URL = "https://max.api.email.nexusnerds.com.br/enviar-formulario";
 const FormularioService = {
   enviarFormulario: async (formData) => {
     try {
-      // 🔥 Ajustando os dados antes de enviar
+      const isEmpresa = formData.tipoDocumento === "CNPJ";
+
       const dadosCorrigidos = {
         nome: formData.nome,
         cpf: formData.cpf,
-        rg: formData.rg?.trim() || "Não informado", // 🔥 Garante que RG seja enviado
-        dataNascimento: formData.dataNascimento?.trim() || "Não informado", // 🔥 Evita erro caso esteja vazio
-        telefone1: formData.telefone1?.trim() || "N/A", // 🔥 Evita undefined
+        rg: formData.rg?.trim() || "Não informado",
+        dataNascimento: formData.dataNascimento?.trim() || "Não informado",
+        telefone1: formData.telefone1?.trim() || "N/A",
         telefone2: formData.telefone2?.trim() || "",
         telefone3: formData.telefone3?.trim() || "",
         email: formData.email,
         cidade: formData.cidade,
         bairro: formData.bairro,
-        rua: formData.rua?.trim() || formData.endereco?.trim() || "N/A", // 🔥 Garante que rua tenha valor
+        rua: formData.rua?.trim() || formData.endereco?.trim() || "N/A",
         endereco: formData.endereco?.trim() || formData.rua?.trim() || "N/A",
         numero: formData.numero?.trim() || "N/A",
         cep: formData.cep,
         complemento: formData.complemento || "",
         latitude: formData.latitude ? String(formData.latitude) : "",
         longitude: formData.longitude ? String(formData.longitude) : "",
-        vendedor: formData.vendedor || "Não informado", // 🔥 Evita erro se estiver vazio
+        vendedor: formData.vendedor || "Não informado",
         plano: formData.plano,
         streaming: formData.streaming || "Nenhum",
         vencimento: formData.vencimento,
         vendedorEmail: formData.vendedorEmail || "Não informado",
+      
+        // ✅ Campos fixos
+        tipoDocumento: formData.tipoDocumento || "CPF",
+        isEmpresa: isEmpresa,
       };
+      
+      // ✅ Se for empresa, adiciona campos exclusivos
+      if (isEmpresa) {
+        dadosCorrigidos.ie = formData.ie || "Não informado";
+        dadosCorrigidos.nomeFantasia = formData.nomeFantasia || "Não informado";
+        dadosCorrigidos.responsavel = formData.responsavel || "Não informado";
+        dadosCorrigidos.cpfResponsavel = formData.cpfResponsavel || "Não informado";
+        dadosCorrigidos.dataNascimentoResponsavel = formData.dataNascimentoResponsavel || "Não informado";
+        dadosCorrigidos.dataAberturaEmpresa = formData.dataAberturaEmpresa || "Não informada";
+      }
 
-      // 🔍 Log dos dados antes do envio
-      //console.log("📤 Enviando para API:", JSON.stringify(dadosCorrigidos, null, 2));
-
-      // 🔥 Fazendo a requisição
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {

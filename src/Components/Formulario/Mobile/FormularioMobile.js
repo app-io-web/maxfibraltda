@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "../../../Styles/Formulario/Mobile/FormularioMobile.css";
 import StepperMobile from "./StepperMobile";
 import StepDadosPessoaisMobile from "./StepDadosPessoaisMobile";
@@ -7,13 +8,34 @@ import StepEnderecoMobile from "./StepEnderecoMobile";
 import StepPlanoMobile from "./StepPlanoMobile";
 import StepConfirmacaoMobile from "./StepConfirmacaoMobile";
 
-const FormularioMobile = ({ setPlanoSelecionado, setStreamingSelecionado, setVencimentoSelecionado }) => {
+const FormularioMobile = ({   
+  setPlanoSelecionado,
+  setStreamingSelecionado,
+  setVencimentoSelecionado,
+  planoInicial = "Gold",
+  tipoDocumentoInicial = "CPF"
+}) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    nome: "", cpf: "", rg: "", dataNascimento: "",
-    email: "", telefone1: "", telefone2: "",
-    cidade: "", bairro: "", endereco: "", cep: "", numero: "", complemento: "",
-    plano: "Gold", streaming: "", vencimento: "",
+    nome: "",
+    cpf: "",
+    rg: "",
+    dataNascimento: "",
+    email: "",
+    telefone1: "",
+    telefone2: "",
+    cidade: "",
+    bairro: "",
+    endereco: "",
+    cep: "",
+    numero: "",
+    complemento: "",
+    latitude: "",
+    longitude: "",
+    plano: planoInicial,
+    tipoDocumento: tipoDocumentoInicial,
+    streaming: "",
+    vencimento: ""
   });
 
   const nextStep = () => setStep(step + 1);

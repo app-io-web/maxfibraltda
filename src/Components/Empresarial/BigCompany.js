@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { buscarPlanosEmpresariais } from '../../Services/Empresarial/servicePlanosEmpresariais';
 import '../../Styles/PlanosEmpresariais.css';
 import { FaWifi, FaHeadset, FaClock, FaNetworkWired, FaServer } from 'react-icons/fa';
 
 function BigCompany() {
   const [dados, setDados] = useState(null);
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
     buscarPlanosEmpresariais().then(data => {
       if (data) setDados(data.big);
     });
   }, []);
+
+  const handleAssineAgora = () => {
+    navigate("/cadastro", {
+      state: {
+        plano: "Big Company",
+        tipoDocumento: "CNPJ" // 👈 Isso força os campos e planos empresariais no formulário
+      }
+    });
+  };
 
   if (!dados) return null;
 
@@ -26,13 +39,10 @@ function BigCompany() {
       React.createElement('span', null, React.createElement(FaClock, { className: 'plano-icon' }), `SLA: ${dados.Tempo_de_SLA}`),
       React.createElement('span', null, React.createElement(FaHeadset, { className: 'plano-icon' }), dados.Suporte)
     ),
-    React.createElement('button', {
-      className: 'botao-beneficios',
-      onClick: () => {
-        const section = document.getElementById('formulario-contato');
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 'ASSINE AGORA')
+    <button className="botao-beneficios" onClick={handleAssineAgora}>
+      ASSINE AGORA
+    </button>
+    
   );
 }
 

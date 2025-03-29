@@ -12,6 +12,8 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
   const [loading, setLoading] = useState(false); // 🔥 Estado de loading
     const [mostrarModal, setMostrarModal] = useState(false);
     const [protocoloGerado, setProtocoloGerado] = useState("");
+    const isEmpresa = formData.tipoDocumento === "CNPJ";
+
 
   // Alterna visibilidade da seção
   const toggleSection = (section) => {
@@ -102,13 +104,29 @@ const StepConfirmacaoMobile = ({ prevStep, formData }) => {
         </div>
         {expandedSection === "dadosPessoais" && (
           <div className="accordion-content">
+            <p><strong>{isEmpresa ? "CNPJ" : "CPF"}:</strong> {formData.cpf}</p>
             <p><strong>Nome:</strong> {formData.nome}</p>
-            <p><strong>CPF:</strong> {formData.cpf}</p>
-            <p><strong>RG:</strong> {formData.rg}</p>
-            <p><strong>Data de Nascimento:</strong> {formatarData(formData.dataNascimento)}</p>
+
+            {!isEmpresa ? (
+              <>
+                <p><strong>RG:</strong> {formData.rg}</p>
+                <p><strong>Data de Nascimento:</strong> {formatarData(formData.dataNascimento)}</p>
+              </>
+            ) : (
+              <>
+                <p><strong>Nome Fantasia:</strong> {formData.nomeFantasia || "Não informado"}</p>
+                <p><strong>IE:</strong> {formData.ie || "Não informado"}</p>
+                <p><strong>Data de Abertura:</strong> {formatarData(formData.dataAberturaEmpresa)}</p>
+                <p><strong>Responsável:</strong> {formData.responsavel || "Não informado"}</p>
+                <p><strong>CPF do Responsável:</strong> {formData.cpfResponsavel || "Não informado"}</p>
+                <p><strong>Data de Nascimento do Responsável:</strong> {formatarData(formData.dataNascimentoResponsavel)}</p>
+              </>
+            )}
           </div>
         )}
       </div>
+
+
 
       {/* 🔹 CONTATO */}
       <div className="accordion">
